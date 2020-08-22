@@ -14,6 +14,22 @@
       {
         "source": "/all",
         "function": "app"
+      },
+      {
+        "source": "/posts",
+        "function": "app"
+      },
+      {
+        "source": "post/:id",
+        "function": "app"
+      },
+      {
+        "source": "/user/:id",
+        "function": "app"
+      },
+      {
+        "source": "/comment/:id",
+        "function": "app"
       }
     ],
     "ignore": [
