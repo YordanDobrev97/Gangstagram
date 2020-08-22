@@ -10,5 +10,11 @@ module.exports = {
     },
     all: () => {
         return db.collection('users').get();
+    },
+    getById: (id) => {
+        return db.collection('users').doc(id).get();
+    },
+    update: (id, data) => {
+        return db.collection('users').doc(id).update(data);
     }
 }

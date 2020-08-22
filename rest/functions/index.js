@@ -2,6 +2,7 @@ const functions = require('firebase-functions');
 const express = require('express');
 const bodyParser = require('body-parser');
 const models = require('./models/user.js');
+const helper = require('./utils/helper.js');
 
 const app = express();
 const PORT = 3000;
@@ -20,20 +21,43 @@ app.post('/create', (req, res) => {
     const {
         username, 
         password, 
-        imageUrl, 
+        profileImg, 
         followers, 
         followed } = req.body;
 
     models.create({
         username, 
         password, 
-        imageUrl, 
+        profileImg, 
         followers, 
         followed,
-        posts: []
+        posts: [],
+        comments: []
     }).then(()  => {
         res.send('User saved!');
     })
+})
+
+app.get('/user/:id', (req, res) => {
+    const { id } = req.params;
+    
+    models.getById(id).then((user) => {
+        const currentUser = helper.getDataWithId(user);
+        
+        res.send(`User: ${currentUser.username}`)
+    });
+})
+
+app.post('/comment/:id', (req, res) => {
+    const { id } = req.params;
+    const { description } = req.body;
+    
+    models.getById(id).then((user) => {
+        const currentUser = helper.getDataWithId(user);
+        currentUser.comments.push(description);
+        models.update(id, currentUser);
+        res.send(`Sucessfully add comment on user: ${currentUser.username} with comment ${description}`);
+    });
 })
 
 app.get('/all', async (req, res) => {
