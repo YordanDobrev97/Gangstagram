@@ -60,6 +60,18 @@ app.post('/comment/:id', (req, res) => {
     });
 })
 
+app.post('/post/:id', (req, res) => {
+    const { id } = req.params;
+    const { description, imageUrl } = req.body;
+
+    models.getById(id).then((user) => {
+        const currentUser = helper.getDataWithId(user);
+        currentUser.posts.push({description, imageUrl});
+        models.update(id, currentUser);
+        res.send(`Sucessfully add post on user: ${currentUser.username}`);
+    });
+})
+
 app.get('/all', async (req, res) => {
     const snapshot = await models.all();
     const users = snapshot.docs.map(doc => doc.data());
