@@ -1,5 +1,5 @@
 const firebase = require('firebase');
-const firebaseConfig = require('../../config/firebase.js');
+const firebaseConfig = require('../config/firebase.js');
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
