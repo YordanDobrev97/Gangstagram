@@ -60,6 +60,17 @@ app.post('/comment/:id', (req, res) => {
     });
 })
 
+app.get('/posts', async (req, res) => {
+    const snapshot = await models.all();
+    const users = snapshot.docs.map(doc => doc.data());
+    const posts = [];
+    users.forEach(user => {
+        posts.push(user.posts);
+    });
+
+    res.send(posts);
+})
+
 app.post('/post/:id', (req, res) => {
     const { id } = req.params;
     const { description, imageUrl } = req.body;
