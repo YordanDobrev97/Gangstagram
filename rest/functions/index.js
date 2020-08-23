@@ -1,13 +1,15 @@
 const functions = require('firebase-functions');
 const express = require('express');
+const cors  = require('cors');
 const bodyParser = require('body-parser');
 const models = require('./models/user.js');
 const helper = require('./utils/helper.js');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 app.use(bodyParser.json())
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Hello Express!');
@@ -24,7 +26,8 @@ app.post('/create', (req, res) => {
         profileImg, 
         followers, 
         followed } = req.body;
-
+    
+        console.log(req.body);
     models.create({
         username, 
         password, 

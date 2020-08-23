@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from './style.module.css';
+import Input from '../Input/input';
+import styles from '../Common/style.module.css';
 
 function Login() {
     return (
@@ -10,21 +11,15 @@ function Login() {
                     <img src="https://i.imgur.com/zqpwkLQ.png" />
                 </div>
                 <div className={styles['l-part']}>
-                    <input type="text" name='username' placeholder="Username" className={styles['input-1']} />
-                <div className={styles['overlap-text']}>
-                    <input type="password" name='password' placeholder="Password" className={styles['input-2']} />
-                    <a href="#">Forgot?</a>
-                </div>
-                <input type="button" value="Log in" className={styles.btn} />
-            </div>
+                    <Input type='text' name='username' placeholder="Username" style={styles['input-1']}/>
 
-            <div className={styles['sub-content']}>
-                <div className={styles['s-part']}>
-                    Don't have an account?<a href="#">Sign up</a>
+                    <div className={styles['overlap-text']}>
+                        <Input type="password" name='password' placeholder="Password" style={styles['input-2']} />
+                    </div>
+                    <input type="button" value="Log in" className={styles.btn} />
                 </div>
             </div>
         </div>
-    </div>
     )
 }
 
