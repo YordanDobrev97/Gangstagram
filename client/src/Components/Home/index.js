@@ -6,37 +6,12 @@ import styles from './style.module.css';
 import history from '../../history';
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isClickRegister: false
-        }
-    }
-
-    registerForm = () => {
-        this.setState({
-            isClickRegister: true
-        });
-    }
-
     render() {
-        const isClickRegister = this.state.isClickRegister;
-
         return (
             <Router history={history}>
                 <Redirect from= '/' to='/login' />
                 <Link to='/login'/>
                 <Link to='/register'/>
-
-                {/* <div>
-                    { isClickRegister ? <Route path='/register' component={ Register }/> :
-                    (
-                        <div>
-                            <Login />
-                        </div>
-                    )}
-                </div> */}
 
                 <Switch>
                     <Route path='/login'>
