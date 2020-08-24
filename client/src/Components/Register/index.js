@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect, Link } from 'react-router-dom'
 import Input from '../Input/input';
 import styles from '../Common/style.module.css';
 
@@ -14,9 +15,9 @@ class Register extends Component {
        const password = this.state.password;
        const repeatPassword = this.state.repeatPassword;
     
-    //    if (password !== repeatPassword) {
-    //        return;
-    //    }
+       if (password !== repeatPassword) {
+           return;
+       }
 
        fetch('http://localhost:3001/create', {
            method: 'POST',
@@ -35,7 +36,6 @@ class Register extends Component {
                })
        }).then(res => res.json())
          .then(result => {
-             console.log(result);
          })
     }
 
@@ -63,7 +63,9 @@ class Register extends Component {
                             <Input type="password" name='repeatPassword' placeholder="repeatPassword" style={styles['input-2']} onChange={this.getInputValue.bind(this)} />
                         </div>
 
-                        <button type='submit' className={styles.btn} onClick={this.register}>Register</button>
+                        <Link to='/login'>
+                        <   button type='submit' className={styles.btn} onClick={this.register}>Register</button>
+                        </Link>
                     </div>
                 </div>
             </div>
