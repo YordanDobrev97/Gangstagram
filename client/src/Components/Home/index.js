@@ -27,7 +27,6 @@ class Home extends Component {
                             </div>
                         </div>
                     </Route>
-
                     <Route path='/register'>
                         <Register />
 
@@ -40,6 +39,7 @@ class Home extends Component {
                             </div>
                         </div>
                     </Route>
+                    
                 </Switch>
             </Router>
         )

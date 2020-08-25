@@ -37,9 +37,6 @@ app.post('/create', (req, res) => {
     
     console.log(req.body);
 
-     //create user with email and password
-     models.createUser({email, password});
-
     //create collection
     models.create({
         email,
@@ -50,9 +47,13 @@ app.post('/create', (req, res) => {
         followed,
         posts: [],
         comments: []
-    }).then(r => r.json())
+    })
         .then(() => {
-            console.log('User created!');
+            //create user with email and password
+            models.createUser({email, password}).then(() => {
+                console.log('User created!');
+                res.send('User created!');
+            });
         })
 })
 

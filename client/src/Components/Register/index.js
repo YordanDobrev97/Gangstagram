@@ -27,7 +27,6 @@ class Register extends Component {
             'Access-Control-Allow-Origin': '*'
           },
           mode: 'cors',
-          credentials: 'include',
           body: JSON.stringify(
                { email,
                  username, 
@@ -37,8 +36,9 @@ class Register extends Component {
                  followed: 0
                })
        }).then(res => res.json())
-         .then(result => {
-         })
+       .then(data => {
+           console.log(data);
+       })
     }
 
     getInputValue = (name, value) => {
