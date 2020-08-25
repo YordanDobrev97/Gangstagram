@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import Input from '../Input/input';
 import styles from '../Common/style.module.css';
 import Cookies from 'universal-cookie';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component{
     constructor(props){
         super(props);
 
-        this.state = {};
+        this.state = {
+            isLooged: false
+        };
     }
 
     login = () => {
@@ -29,6 +32,9 @@ class Login extends Component{
         .then(userId => {
             const cookie = new Cookies();
             cookie.set('user', userId);
+            this.setState({
+                isLooged: true
+            })
         });
     }
 
@@ -39,23 +45,28 @@ class Login extends Component{
     }
 
     render() {
-        return (
-            <div>
-                <div className={styles.wrapper}>
-                    <div className={styles['main-content']} />
-                    <div className={styles.header}>
-                        <img src="https://i.imgur.com/zqpwkLQ.png" />
-                    </div>
-                    <div className={styles['l-part']}>
-                        <Input type='text' name='email' placeholder="Email" style={styles['input-1']} onChange={this.getInputValue.bind(this)}/>
+        const isLooged = this.state.isLooged;
 
-                        <div className={styles['overlap-text']}>
-                            <Input type="password" name='password' placeholder="Password" style={styles['input-2']} onChange={this.getInputValue.bind(this)} />
+        return (
+            isLooged ?
+                <Redirect to='posts'/> 
+                :
+                <div>
+                    <div className={styles.wrapper}>
+                        <div className={styles['main-content']} />
+                        <div className={styles.header}>
+                            <img src="https://i.imgur.com/zqpwkLQ.png" />
                         </div>
-                        <input type="button" value="Log in" className={styles.btn} onClick={this.login}/>
+                        <div className={styles['l-part']}>
+                            <Input type='text' name='email' placeholder="Email" style={styles['input-1']} onChange={this.getInputValue.bind(this)}/>
+
+                            <div className={styles['overlap-text']}>
+                                <Input type="password" name='password' placeholder="Password" style={styles['input-2']} onChange={this.getInputValue.bind(this)} />
+                            </div>
+                            <input type="button" value="Log in" className={styles.btn} onClick={this.login}/>
+                        </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }

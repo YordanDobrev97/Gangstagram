@@ -4,15 +4,18 @@ import Login from '../Login/index';
 import Register from '../Register/index';
 import styles from './style.module.css';
 import history from '../../history';
+import Posts from '../Post/all';
 
 class Home extends Component {
+    
     render() {
         return (
             <Router history={history}>
                 <Redirect from= '/' to='/login' />
                 <Link to='/login'/>
                 <Link to='/register'/>
-
+                <Link to='/posts'/>
+                
                 <Switch>
                     <Route path='/login'>
                         <Login />
@@ -27,6 +30,7 @@ class Home extends Component {
                             </div>
                         </div>
                     </Route>
+                    
                     <Route path='/register'>
                         <Register />
 
@@ -39,7 +43,10 @@ class Home extends Component {
                             </div>
                         </div>
                     </Route>
-                    
+
+                    <Route path='/posts'>
+                        <Posts />
+                    </Route>
                 </Switch>
             </Router>
         )
