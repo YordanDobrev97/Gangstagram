@@ -11,6 +11,9 @@ module.exports = {
     createUser: ({email, password}) => {
        return firebase.auth().createUserWithEmailAndPassword(email, password);
     },
+    login: ({email, password}) => {
+        return firebase.auth().signInWithEmailAndPassword(email, password);
+    },
     all: () => {
         return db.collection('users').get();
     },
