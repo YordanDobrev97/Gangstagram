@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const express = require('express');
 const cors  = require('cors');
+const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
 const models = require('./models/user.js');
 const helper = require('./utils/helper.js');
@@ -9,9 +10,15 @@ const app = express();
 const PORT = 3001;
 
 app.use(bodyParser.json())
-app.use(cors());
+
+app.use(cors({
+    expolsedHeaders: 'Authorization'
+}))
+
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
+    res.cookie('defaultPage', 'default cookie page')
     res.send('Hello Express!');
 });
 
@@ -21,14 +28,18 @@ app.get('/home', (req, res) => {
 
 app.post('/create', (req, res) => {
     const {
+        email,
         username, 
         password, 
         profileImg, 
         followers, 
         followed } = req.body;
     
-        console.log(req.body);
+    console.log(req.body);
+
+    //create collection
     models.create({
+        email,
         username, 
         password, 
         profileImg, 
@@ -36,10 +47,16 @@ app.post('/create', (req, res) => {
         followed,
         posts: [],
         comments: []
-    }).then(()  => {
-        res.send('User saved!');
-    })
+    });
+
+    //create user with email and password
+    models.createUser({email, password});
 })
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    res.send('Work');
+});
 
 app.get('/user/:id', (req, res) => {
     const { id } = req.params;

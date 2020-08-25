@@ -8,6 +8,9 @@ module.exports = {
     create: (data) => {
         return db.collection('users').doc().set(data);
     },
+    createUser: ({email, password}) => {
+       return firebase.auth().createUserWithEmailAndPassword(email, password);
+    },
     all: () => {
         return db.collection('users').get();
     },
