@@ -22,7 +22,7 @@ class Home extends Component {
                                 Don't have an account?
 
                                 <Link to='/register'>
-                                    <button onClick={this.registerForm} className={styles['signupbtn']}>Sign up</button>
+                                    Sign up
                                 </Link>
                             </div>
                         </div>
@@ -30,6 +30,15 @@ class Home extends Component {
 
                     <Route path='/register'>
                         <Register />
+
+                        <div className={styles['sub-content']}>
+                            <div className={styles['s-part']}>
+                                Back to Login?
+                                <Link to='/login'>
+                                    Login
+                                </Link>
+                            </div>
+                        </div>
                     </Route>
                 </Switch>
             </Router>

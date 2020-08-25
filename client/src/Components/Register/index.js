@@ -11,6 +11,7 @@ class Register extends Component {
     }
 
     register = () => {
+       const email = this.state.email;
        const username = this.state.username;
        const password = this.state.password;
        const repeatPassword = this.state.repeatPassword;
@@ -26,9 +27,10 @@ class Register extends Component {
             'Access-Control-Allow-Origin': '*'
           },
           mode: 'cors',
-          cache: "no-cache",
+          credentials: 'include',
           body: JSON.stringify(
-               { username, 
+               { email,
+                 username, 
                  password,
                  profileImg: "https://img.pngio.com/profile-icon-png-image-free-download-searchpngcom-profile-icon-png-673_673.png",
                  followers: 0,
@@ -54,6 +56,8 @@ class Register extends Component {
                         <img src="https://i.imgur.com/zqpwkLQ.png" />
                     </div>
                     <div className={styles['l-part']}>
+                        <Input type='text' name='email' placeholder="Email" style={styles['input-1']} onChange={this.getInputValue.bind(this)}/>
+
                         <Input type='text' name='username' placeholder="Username" style={styles['input-1']} onChange={this.getInputValue.bind(this)}/>
 
                         <div className={styles['overlap-text']}>
@@ -64,7 +68,7 @@ class Register extends Component {
                         </div>
 
                         <Link to='/login'>
-                        <   button type='submit' className={styles.btn} onClick={this.register}>Register</button>
+                            <button type='submit' className={styles.btn} onClick={this.register}>Register</button>
                         </Link>
                     </div>
                 </div>
