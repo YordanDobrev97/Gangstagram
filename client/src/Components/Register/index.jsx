@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import Input from '../Input/input';
 import styles from '../Common/style.module.css';
+import Image from '../Common/image';
 
 class Register extends Component {
     constructor(props) {
@@ -52,9 +53,8 @@ class Register extends Component {
             <div>
                 <div className={styles.wrapper}>
                     <div className={styles['main-content']} />
-                    <div className={styles.header}>
-                        <img src="https://i.imgur.com/zqpwkLQ.png" />
-                    </div>
+                    <Image />
+                    
                     <div className={styles['l-part']}>
                         <Input type='text' name='email' placeholder="Email" style={styles['input-1']} onChange={this.getInputValue.bind(this)}/>
 
