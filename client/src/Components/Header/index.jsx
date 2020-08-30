@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import Image from '../Common/image';
 import styles from './style.module.css';
+import Profile from '../Profile/index';
 
 class Header extends Component {
     render() {
@@ -14,6 +15,10 @@ class Header extends Component {
 
                 <div className={styles.image}>
                     <Image className={styles.dashboard}/>
+                </div>
+
+                <div className={styles.profile}>
+                    <Profile />
                 </div>
             </header>
         )
