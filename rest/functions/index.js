@@ -3,11 +3,11 @@ const express = require('express');
 const cors  = require('cors');
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
-const models = require('./models/user.js');
 const helper = require('./utils/helper.js');
-
 const app = express();
 const PORT = 3001;
+const postRouter =require('./routes/post');
+const models = require('./models/user');
 
 app.use(bodyParser.json())
 
@@ -17,45 +17,7 @@ app.use(cors({
 
 app.use(cookieParser());
 
-app.get('/', (req, res) => {
-    res.cookie('defaultPage', 'default cookie page')
-    res.send('Hello Express!');
-});
-
-app.get('/home', (req, res) => {
-    res.send('Home Page');
-})
-
-app.post('/create', (req, res) => {
-    const {
-        email,
-        username, 
-        password, 
-        profileImg, 
-        followers, 
-        followed } = req.body;
-    
-    console.log(req.body);
-
-    //create collection
-    models.create({
-        email,
-        username, 
-        password, 
-        profileImg, 
-        followers, 
-        followed,
-        posts: [],
-        comments: []
-    })
-        .then(() => {
-            //create user with email and password
-            models.createUser({email, password}).then(() => {
-                console.log('User created!');
-                res.send('User created!');
-            });
-        })
-})
+app.use('/create', postRouter);
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
