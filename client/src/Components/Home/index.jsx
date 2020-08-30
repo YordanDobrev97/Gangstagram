@@ -3,7 +3,6 @@ import { Link, Route, Switch, Router, Redirect } from 'react-router-dom'
 import Login from '../Login/index';
 import Register from '../Register/index';
 import history from '../../history';
-import Posts from '../Post/all';
 import Footer from '../Footer/index';
 import Dashboard  from '../Dashboard/index';
 
@@ -26,10 +25,6 @@ class Home extends Component {
                     <Route path='/register'>
                         <Register />
                         <Footer message={'Back to Login?'} link='/login' action='Login'/>
-                    </Route>
-
-                    <Route path='/posts'>
-                        <Posts />
                     </Route>
 
                     <Route path='/dashboard'>

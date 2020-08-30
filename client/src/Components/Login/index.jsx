@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Input from '../Input/input';
 import styles from '../Common/style.module.css';
 import Cookies from 'universal-cookie';
-import { Redirect } from 'react-router-dom';
 import Image from '../Common/image';
+import Dashboard from '../Dashboard/index'
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
     constructor(props) {
@@ -47,6 +48,15 @@ class Login extends Component {
 
     render() {
         const isLooged = this.state.isLooged;
+       
+        if (isLooged) {
+            return (
+                <React.Fragment>
+                    <Redirect to='/dashboard'/>
+                    <Dashboard />
+                </React.Fragment>
+            )
+        }
 
         return (
             <div>
