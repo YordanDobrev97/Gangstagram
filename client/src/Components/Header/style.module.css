@@ -1,0 +1,22 @@
+.wrapper {
+    background-color: whitesmoke;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.camera {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    top: 15px;
+    right: 280px;
+    font-size: 28px;
+}
+
+.image {
+   display: flex;
+   position: relative;
+   right: 300px;
+}

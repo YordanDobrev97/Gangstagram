@@ -14,6 +14,7 @@ body {
   border: 0px solid #000;
   margin: 50px auto;
   padding: 10px;
+  margin-bottom: 30px;
 }
   
 .header {
@@ -21,12 +22,16 @@ body {
   margin-bottom: 5px;
 }
 
-.header img {
+.form img{
   height: 50px;
   width: 175px;
-  margin: auto;
+  margin: 15px;
   position: relative;
-  left: 0px;
+}
+
+.dashboard img {
+  left: 500px;
+  margin-bottom: 20px;
 }
 
 .input-1,

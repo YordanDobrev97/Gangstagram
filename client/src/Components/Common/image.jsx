@@ -1,9 +1,8 @@
 import React from 'react';
-import styles from './style.module.css';
 
-function Image() {
+function Image(props) {
     return (
-        <div className={styles.header}>
+        <div className={props.className}>
             <img src="https://i.imgur.com/zqpwkLQ.png" />
         </div>
     )

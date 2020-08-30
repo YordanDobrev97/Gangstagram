@@ -5,16 +5,17 @@ import Register from '../Register/index';
 import history from '../../history';
 import Posts from '../Post/all';
 import Footer from '../Footer/index';
+import Dashboard  from '../Dashboard/index';
 
 class Home extends Component {
     
     render() {
         return (
             <Router history={history}>
-                <Redirect from= '/' to='/login' />
                 <Link to='/login'/>
                 <Link to='/register'/>
                 <Link to='/posts'/>
+                <Link to='dashboard' />
                 
                 <Switch>
                     <Route path='/login'>
@@ -29,6 +30,10 @@ class Home extends Component {
 
                     <Route path='/posts'>
                         <Posts />
+                    </Route>
+
+                    <Route path='/dashboard'>
+                        <Dashboard />
                     </Route>
                 </Switch>
             </Router>
