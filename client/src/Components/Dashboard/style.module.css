@@ -1,0 +1,16 @@
+.aside-container img, .user {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    bottom: 65rem;
+    left: 550px;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.user {
+    bottom: 65rem;
+    width: 100px;
+    height: 50px;
+    border-radius: 0;
+}
