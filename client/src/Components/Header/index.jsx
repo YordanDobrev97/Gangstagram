@@ -16,7 +16,7 @@ class Header extends Component {
                     Gangstagram
                 </div>
 
-                <button>Create post</button>
+                <button className={styles['create-post-btn']}>Create post</button>
 
                 <div className={styles.profile}>
                     <Profile />

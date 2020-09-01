@@ -47,3 +47,9 @@
                10px 10px hsl(50, 50%, 28%),
                10px 10px 30px rgba(0,0,0,.7),
 }
+
+.create-post-btn {
+    width: 120px;
+    background-color: #006400;
+    color: white;
+}
