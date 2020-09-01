@@ -3,6 +3,7 @@ import styles from './style.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import Profile from '../Profile/index';
+import LikeButton from './likeButton';
 
 function Post(props) {
     return (
@@ -22,10 +23,11 @@ function Post(props) {
 
             <footer>
                 <p>
+                    <LikeButton />
                     <FontAwesomeIcon icon={faHeart} />
                      {props.likes}
                 </p>
-                
+
                 <p><a href='#'>Comments</a></p>
             </footer>
         </div>
