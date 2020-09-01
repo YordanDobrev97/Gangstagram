@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
-import Image from '../Common/image';
+import Image from '../Common/logo';
 import styles from './style.module.css';
 import Profile from '../Profile/index';
 
@@ -13,9 +13,12 @@ class Header extends Component {
                     <FontAwesomeIcon icon={faCamera} />
                 </div>
 
-                <div className={styles.image}>
-                    <Image className={styles.dashboard}/>
+                <div className={styles['name-logo']}>
+                    Gangstagram
+                    {/* <Image className={styles.dashboard} /> */}
                 </div>
+
+                <button>Create post</button>
 
                 <div className={styles.profile}>
                     <Profile />

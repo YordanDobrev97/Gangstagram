@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Input from '../Input/input';
 import styles from '../Common/style.module.css';
 import Cookies from 'universal-cookie';
-import Image from '../Common/image';
+import Image from '../Common/logo';
 import Dashboard from '../Dashboard/index'
 import { Redirect } from "react-router-dom";
 

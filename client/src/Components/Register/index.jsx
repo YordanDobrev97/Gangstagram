@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import Input from '../Input/input';
 import styles from '../Common/style.module.css';
-import Image from '../Common/image';
+import Image from '../Common/logo';
 
 class Register extends Component {
     constructor(props) {

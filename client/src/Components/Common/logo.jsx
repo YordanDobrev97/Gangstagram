@@ -3,7 +3,7 @@ import React from 'react';
 function Image(props) {
     return (
         <div className={props.className}>
-            <img src="https://i.imgur.com/zqpwkLQ.png" />
+            <img src="https://fanart.tv/fanart/tv/283961/hdtvlogo/gangsta-55a8d84a9a29a.png" />
         </div>
     )
 }
