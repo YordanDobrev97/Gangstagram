@@ -25,7 +25,7 @@ class Register extends Component {
            method: 'POST',
            headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Accept': 'application/json'
           },
           mode: 'cors',
           body: JSON.stringify(
@@ -37,9 +37,9 @@ class Register extends Component {
                  followed: 0
                })
        }).then(res => res.json())
-       .then(data => {
-           console.log(data);
-       })
+         .then(response => {
+             console.log(response);
+         })
     }
 
     getInputValue = (name, value) => {
