@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Post from './index';
-import Profile from '../Profile/index';
 
 class Posts extends Component {
    constructor(props) {
