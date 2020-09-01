@@ -7,6 +7,7 @@ const helper = require('./utils/helper.js');
 const app = express();
 const PORT = 3001;
 const postRouter =require('./routes/post');
+const userRouter = require('./routes/user');
 const models = require('./models/user');
 
 app.use(bodyParser.json())
@@ -18,6 +19,7 @@ app.use(cors({
 app.use(cookieParser());
 
 app.use('/create', postRouter);
+app.use('/user', userRouter);
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
@@ -27,16 +29,6 @@ app.post('/login', (req, res) => {
         res.json(userId);
     });
 });
-
-app.get('/user/:id', (req, res) => {
-    const { id } = req.params;
-    
-    models.getById(id).then((user) => {
-        const currentUser = helper.getDataWithId(user);
-        
-        res.send(`User: ${currentUser.username}`)
-    });
-})
 
 app.post('/comment/:id', (req, res) => {
     const { id } = req.params;

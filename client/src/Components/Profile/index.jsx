@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './style.module.css';
 
-function Profile() {
+function Profile(props) {
     return (
         <header className={styles.imageProfile}>
-            <img src='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' />
-            <p>Pesho Georiev</p>
+            <img src={props.profileImg} />
+            <p>{props.username}</p>
         </header>
     )
 }

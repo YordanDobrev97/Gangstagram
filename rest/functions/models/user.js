@@ -6,10 +6,13 @@ const db = firebase.firestore();
 
 module.exports = {
     create: (data) => {
-        return db.collection('users').doc().set(data);
+        return db.collection('users').add(data);
     },
     createUser: ({email, password}) => {
        return firebase.auth().createUserWithEmailAndPassword(email, password);
+    },
+    authtication: ({email, password}) =>{
+        return firebase.auth().currentUser.uid;
     },
     login: ({email, password}) => {
         return firebase.auth().signInWithEmailAndPassword(email, password);

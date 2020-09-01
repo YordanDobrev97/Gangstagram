@@ -7,18 +7,23 @@ import Profile from '../Profile/index';
 function Post(props) {
     return (
         <div className={styles.container}>
-           <Profile />
+
+            <Profile username={props.username} profileImg={props.profileImg}/>
 
             <main className={styles.imagePost}>
-                <img src='https://www.w3schools.com/w3css/img_lights.jpg' />
+                {props.postData.map(data => {
+                   return <div>
+                        <img src={data.imageUrl} />
+                        <p>{data.description}</p> 
+                   </div>
+                })}
 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </main>
 
             <footer>
                 <p>
                     <FontAwesomeIcon icon={faHeart} />
-                    495 likes
+                     {props.likes}
                 </p>
                 
                 <p><a href='#'>Comments</a></p>

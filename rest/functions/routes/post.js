@@ -24,12 +24,11 @@ router.post('/', (req, res) => {
         posts: [],
         comments: [],
         likes: 0
-    })
-        .then(() => {
+    }).then((response) => {
             //create user with email and password
             models.createUser({email, password}).then(() => {
                 console.log('User created!');
-                res.send('User created!');
+                res.send(response.id);
             });
         })
 })
