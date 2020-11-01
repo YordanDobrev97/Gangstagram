@@ -3,7 +3,7 @@ import Input from '../Input/input';
 import styles from '../Common/style.module.css';
 import Cookies from 'universal-cookie';
 import Image from '../Common/logo';
-import Dashboard from '../Feed/index'
+import Feeds from '../Feed/index'
 import { Redirect } from "react-router-dom";
 
 class Login extends Component {
@@ -57,8 +57,8 @@ class Login extends Component {
         if (isLooged) {
             return (
                 <React.Fragment>
-                    <Redirect to='/dashboard'/>
-                    <Dashboard />
+                    <Redirect to='/feeds'/>
+                    <Feeds />
                 </React.Fragment>
             )
         }

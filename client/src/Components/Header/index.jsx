@@ -1,4 +1,5 @@
 import React from 'react'
+import Profile from '../Profile/index';
 
 class Header extends React.Component{
     render(){
@@ -15,6 +16,8 @@ class Header extends React.Component{
                         <input type="text" placeholder="Search" />
                     </div>
                 </nav>
+
+               <a href='#'>My Profile</a>
            </header>
         )
     }
