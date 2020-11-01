@@ -1,7 +1,7 @@
-﻿using Instagram.WebAPI.Models;
-
-namespace Instagram.WebAPI.Services
+﻿namespace Instagram.WebAPI.Services
 {
+    using Instagram.WebAPI.Models;
+
     public interface IUsersService
     {
         void Register(User user);

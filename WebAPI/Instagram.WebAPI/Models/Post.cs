@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Instagram.WebAPI.Models
+﻿namespace Instagram.WebAPI.Models
 {
+    using System;
+
     public class Post
     {
         public Post()

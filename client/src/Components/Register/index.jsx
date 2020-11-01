@@ -21,25 +21,29 @@ class Register extends Component {
            return;
        }
 
-       fetch('http://localhost:3001/create', {
+       const data = JSON.stringify({
+            email, 
+            username, 
+            password
+        });
+        console.log(data);
+       const requestOptions = {
            method: 'POST',
            headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          mode: 'cors',
-          body: JSON.stringify(
-               { email,
-                 username, 
-                 password,
-                 profileImg: "https://img.pngio.com/profile-icon-png-image-free-download-searchpngcom-profile-icon-png-673_673.png",
-                 followers: 0,
-                 followed: 0
-               })
-       }).then(res => res.json())
-         .then(response => {
-             console.log(response);
-         })
+            'Access-Control-Allow-Credentials': true
+           },
+           body: data
+       };
+
+       fetch('https://localhost:5001/api/users/Register', requestOptions)
+       .then(res => res.json())
+       .catch(err => {
+           console.log(err)
+       })
+       .then(data => {
+           console.log(data);
+       })
     }
 
     getInputValue = (name, value) => {

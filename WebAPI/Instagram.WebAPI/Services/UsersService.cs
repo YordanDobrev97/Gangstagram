@@ -1,12 +1,8 @@
-﻿using Instagram.WebAPI.Data;
-using Instagram.WebAPI.Models;
-using Instagram.WebAPI.ViewModels.Users;
-using Microsoft.AspNetCore.Identity;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-
-namespace Instagram.WebAPI.Services
+﻿namespace Instagram.WebAPI.Services
 {
+    using Instagram.WebAPI.Data;
+    using Instagram.WebAPI.Models;
+
     public class UsersService : IUsersService
     {
         private readonly ApplicationDbContext db;

@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-
-namespace Instagram.WebAPI.Models
+﻿namespace Instagram.WebAPI.Models
 {
+    using Microsoft.AspNetCore.Identity;
+    using System;
+    using System.Collections.Generic;
+
     public class User : IdentityUser
     {
         public User()

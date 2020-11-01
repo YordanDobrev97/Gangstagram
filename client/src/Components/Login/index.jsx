@@ -3,7 +3,7 @@ import Input from '../Input/input';
 import styles from '../Common/style.module.css';
 import Cookies from 'universal-cookie';
 import Image from '../Common/logo';
-import Dashboard from '../Dashboard/index'
+import Dashboard from '../Feed/index'
 import { Redirect } from "react-router-dom";
 
 class Login extends Component {
@@ -19,27 +19,32 @@ class Login extends Component {
         const email = this.state.email;
         const password = this.state.password;
 
-        fetch('http://localhost:3001/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-            mode: 'cors',
-            body: JSON.stringify({
-                email,
-                password
-            })
-        }).then(response => response.json())
-            .then(userId => {
-                const cookie = new Cookies();
-                cookie.set('user', userId);
-                this.setState({
-                    isLooged: true
-                })
-            });
-    }
+        const data = JSON.stringify({
+           email,
+           password
+        });
+       const requestOptions = {
+           method: 'POST',
+           headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Credentials': true
+           },
+           body: data
+       };
 
+       fetch('https://localhost:5001/api/users/Login', requestOptions)
+       .then(res => {
+           return res.json()
+       })
+        .then(userId => {
+            const cookie = new Cookies();
+            cookie.set('user', userId);
+            this.setState({
+                isLooged: true
+            })
+        });
+    }
+    
     getInputValue = (name, value) => {
         this.setState({
             [name]: value

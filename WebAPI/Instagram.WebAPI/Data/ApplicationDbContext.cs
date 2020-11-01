@@ -1,9 +1,9 @@
-﻿using Instagram.WebAPI.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
-namespace Instagram.WebAPI.Data
+﻿namespace Instagram.WebAPI.Data
 {
+    using Instagram.WebAPI.Models;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

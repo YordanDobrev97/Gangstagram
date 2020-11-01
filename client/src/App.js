@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link, Route, Switch, Router, Redirect } from 'react-router-dom';
+import { Link, Route, Switch, Router } from 'react-router-dom';
 import Login from './Components/Login/index';
 import Register from './Components/Register/index';
 import history from './history';
 import Footer from './Components/Footer/index';
-import Dashboard  from './Components/Dashboard/index';
+import Dashboard  from './Components/Feed/index';
 import Home from './Components/Home/index';
 
 import './App.css';

@@ -1,19 +1,19 @@
-﻿using Instagram.WebAPI.Models;
-using Instagram.WebAPI.ViewModels.Users;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Instagram.WebAPI.Controllers
+﻿namespace Instagram.WebAPI.Controllers
 {
+    using Instagram.WebAPI.Models;
+    using Instagram.WebAPI.ViewModels.Users;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.IdentityModel.Tokens;
+    using System;
+    using System.Collections.Generic;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Text;
+    using System.Threading.Tasks;
+
     [ApiController]
     [Route("/api/Users/[action]")]
     public class UsersController : ControllerBase
@@ -37,7 +37,7 @@ namespace Instagram.WebAPI.Controllers
             return numbers.ToList();
         }
 
-        [HttpPost]
+        [HttpPost()]
         public async Task<IActionResult> Register([FromBody] RegisterInputModel inputModel)
         {
             if (!ModelState.IsValid)
@@ -64,16 +64,16 @@ namespace Instagram.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginInputModel loginInput)
         {
-            var result = await this.signInManager.PasswordSignInAsync(loginInput.Username, loginInput.Password, true, true);
+            var result = await this.signInManager.PasswordSignInAsync(loginInput.Email, loginInput.Password, true, true);
 
             if (!result.Succeeded)
             {
                 return this.BadRequest();
             }
 
-            var user = this.userManager.Users.FirstOrDefault(x => x.UserName == loginInput.Username);
+            var user = this.userManager.Users.FirstOrDefault(x => x.Email == loginInput.Email);
 
-            return this.Ok(this.GenerateJwtToken(loginInput.Username, user));
+            return new JsonResult(this.GenerateJwtToken(loginInput.Email, user));
         }
 
         private object GenerateJwtToken(string email, IdentityUser user)

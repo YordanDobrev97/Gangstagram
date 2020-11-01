@@ -1,18 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../Home/style.module.css';
+import './footer.css';
 
-function Footer(props) {
+function Footer () {
     return (
-        <div className={styles['sub-content']}>
-            <div className={styles['s-part']}>
-                {props.message}
-
-                <Link to={props.link}>
-                    {props.action}
-                </Link>
+        <footer class="footer">
+            <div class="footer__column">
+                <nav class="footer__nav">
+                    <ul class="footer__list">
+                        <li class="footer__list-item"><a href="#" class="footer__link">About Us</a></li>
+                        <li class="footer__list-item"><a href="#" class="footer__link">Support</a></li>
+                        <li class="footer__list-item"><a href="#" class="footer__link">Blog</a></li>
+                        <li class="footer__list-item"><a href="#" class="footer__link">Press</a></li>
+                        <li class="footer__list-item"><a href="#" class="footer__link">Api</a></li>
+                        <li class="footer__list-item"><a href="#" class="footer__link">Jobs</a></li>
+                        <li class="footer__list-item"><a href="#" class="footer__link">Privacy</a></li>
+                        <li class="footer__list-item"><a href="#" class="footer__link">Terms</a></li>
+                        <li class="footer__list-item"><a href="#" class="footer__link">Directory</a></li>
+                        <li class="footer__list-item"><a href="#" class="footer__link">Language</a></li>
+                    </ul>
+                </nav>
             </div>
-        </div>
+            <div class="footer__column">
+                <span class="footer__copyright">© 2017 Vietgram</span>
+            </div>
+        </footer>
     )
 }
 
