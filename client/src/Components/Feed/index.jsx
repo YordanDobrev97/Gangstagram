@@ -3,14 +3,13 @@ import Header from '../Header/index';
 import './style.css';
 import Footer from '../Footer/index';
 import Feed from './all';
-import Profile from '../Profile/index';
 
 class Feeds extends Component {
     render(){
         return(
             <div>
                 <Header />
-                
+
                 <main id="feed">
                     <Feed></Feed>
                 </main>

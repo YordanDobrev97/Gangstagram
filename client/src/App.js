@@ -6,6 +6,7 @@ import history from './history';
 import Footer from './Components/Footer/index';
 import Feeds  from './Components/Feed/index';
 import Home from './Components/Home/index';
+import Profile from './Components/Profile/index';
 
 import './App.css';
 
@@ -16,8 +17,9 @@ function App() {
                 <Link to='/login'/>
                 <Link to='/register'/>
                 <Link to='/posts'/>
-                <Link to='feeds' />
-                
+                <Link to='/feeds' />
+                <Link to='/profile'/>
+
                 <Home />
 
                 <Switch>
@@ -27,7 +29,7 @@ function App() {
                         Don't have an account?
                         <Link to='/register'>
                             Sign up
-                        </Link>                  
+                        </Link>
                     </Route>
                     
                     <Route path='/register'>
@@ -41,6 +43,10 @@ function App() {
 
                     <Route path='/feeds'>
                         <Feeds />
+                    </Route>
+
+                    <Route path='/profile'>
+                        <Profile />
                     </Route>
                 </Switch>
         </Router>

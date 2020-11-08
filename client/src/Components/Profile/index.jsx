@@ -12,6 +12,7 @@ function Profile(props) {
                     <div class="profile__title">
                         <h3 class="profile__username">serranoarevalo</h3>
                         <a href="edit-profile.html">Edit profile</a>
+                        <a href="edit-profile.html">Feeds</a>
                         <i class="fa fa-cog fa-lg"></i>
                     </div>
                     <ul class="profile__stats">
@@ -33,6 +34,8 @@ function Profile(props) {
                         natus illo perspiciatis suscipit, odio consequuntur quasi obcaecati minus! Omnis.
                         <a href="#">serranoarevalo.com</a>
                     </p>
+
+                    <button class="btn success">Create post</button>
                 </div>
             </header>
             <section class="profile__photos">

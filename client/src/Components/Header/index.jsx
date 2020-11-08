@@ -1,5 +1,7 @@
 import React from 'react'
-import Profile from '../Profile/index';
+import { Link, Router } from 'react-router-dom';
+import history from '../../history';
+import Search from '../Search/index';
 
 class Header extends React.Component{
     render(){
@@ -11,13 +13,12 @@ class Header extends React.Component{
                             <img src="https://raw.githubusercontent.com/nomadcoders/vietgram/master/images/logo.png" />
                         </a>
                     </div>
-                    <div class="navigation__column">
-                        <i class="fa fa-search"></i>
-                        <input type="text" placeholder="Search" />
-                    </div>
+                    <Search />
                 </nav>
-
-               <a href='#'>My Profile</a>
+            
+               <Router history={history}>
+                   <Link to='profile'>My Profile</Link>
+               </Router>
            </header>
         )
     }
