@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Post from './index';
+import Create from './create';
 
 class Posts extends Component {
    constructor(props) {
@@ -30,6 +31,8 @@ class Posts extends Component {
 
         return (
             <div>
+                <Create />
+                
                 {allPosts}
             </div>
         )
