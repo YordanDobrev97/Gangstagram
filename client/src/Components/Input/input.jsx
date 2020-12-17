@@ -13,7 +13,7 @@ class Input extends Component {
 
     render() {
         return (
-            <input type={this.props.type} name={this.props.name} placeholder={this.props.placeholder} className={this.props.style} onChange={this.handler.bind(this)}/>
+            <input type={this.props.type} className="input-field" name={this.props.name} placeholder={this.props.placeholder} onChange={this.handler.bind(this)}/>
         )
     }
 }

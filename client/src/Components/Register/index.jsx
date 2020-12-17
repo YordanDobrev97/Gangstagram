@@ -57,8 +57,6 @@ class Register extends Component {
             <div>
                 <div className={styles.wrapper}>
                     <div className={styles['main-content']} />
-                    <Image className={styles.form}/>
-                    
                     <div className={styles['l-part']}>
                         <Input type='text' name='email' placeholder="Email" style={styles['input-1']} onChange={this.getInputValue.bind(this)}/>
 
@@ -72,7 +70,7 @@ class Register extends Component {
                         </div>
 
                         <Link to='/login'>
-                            <button type='submit' className={styles.btn} onClick={this.register}>Register</button>
+                            <button type='submit' className="standart-btn" onClick={this.register}>Register</button>
                         </Link>
                     </div>
                 </div>

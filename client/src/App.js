@@ -26,10 +26,6 @@ function App() {
                     <Route path='/login'>
                         <Login />
                         <Footer />
-                        Don't have an account?
-                        <Link to='/register'>
-                            Sign up
-                        </Link>
                     </Route>
                     
                     <Route path='/register'>

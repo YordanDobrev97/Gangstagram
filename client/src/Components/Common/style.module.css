@@ -4,7 +4,7 @@
 }
   
 body {
-    background-color:#EEEEEE;
+    background-image: url('https://cdn.vox-cdn.com/thumbor/APpxFCAXjj7z-ecM78IiZb6CFHI=/0x0:2040x1360/1200x800/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/66386706/acastro_190919_1777_instagram_0003.0.0.jpg');
 }
   
 .wrapper {
@@ -26,22 +26,11 @@ body {
   height: 80px;
   width: 220px;
   margin: 15px;
-  position: relative;
 }
 
 .dashboard img {
   left: 500px;
   margin-bottom: 20px;
-}
-
-.input-1,
-.input-2 {
-  width: 100%;
-  margin-bottom: 5px;
-  padding: 8px 12px;
-  border: 1px solid #dbdbdb;
-  box-sizing: border-box;
-  border-radius: 3px;
 }
 
 .btn {
@@ -53,4 +42,8 @@ body {
   font-weight: bold;
   cursor: pointer;
   border-radius: 3px;
+}
+
+.overlap-text {
+  color: white;
 }

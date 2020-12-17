@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import Input from '../Input/input';
-import styles from '../Common/style.module.css';
-import Cookies from 'universal-cookie';
-import Image from '../Common/logo';
+import React, { Component } from 'react'
+import Input from '../Input/input'
+import styles from '../Common/style.module.css'
+import Cookies from 'universal-cookie'
 import Feeds from '../Feed/index'
-import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom"
+
+import '../Common/input.css'
 
 class Login extends Component {
     constructor(props) {
@@ -67,14 +68,13 @@ class Login extends Component {
             <div>
                 <div className={styles.wrapper}>
                     <div className={styles['main-content']} />
-                    <Image className={styles.form}/>
                     <div className={styles['l-part']}>
-                        <Input type='text' name='email' placeholder="Email" style={styles['input-1']} onChange={this.getInputValue.bind(this)} />
+                        <Input type='text' className="input-field" name='email' placeholder="Email" onChange={this.getInputValue.bind(this)} />
 
                         <div className={styles['overlap-text']}>
-                            <Input type="password" name='password' placeholder="Password" style={styles['input-2']} onChange={this.getInputValue.bind(this)} />
+                            <Input type="password" className="input-field" name='password' placeholder="Password" onChange={this.getInputValue.bind(this)} />
                         </div>
-                        <input type="button" value="Log in" className={styles.btn} onClick={this.login} />
+                        <input type="button" className="standart-btn" value="Log in" onClick={this.login} />
                     </div>
                 </div>
             </div>
