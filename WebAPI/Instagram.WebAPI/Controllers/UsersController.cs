@@ -64,11 +64,20 @@
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginInputModel loginInput)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(new 
+                {
+                    code = 400,
+                    message = "Not valid data"
+                });
+            }
+
             var result = await this.signInManager.PasswordSignInAsync(loginInput.Email, loginInput.Password, true, true);
 
             if (!result.Succeeded)
             {
-                return this.BadRequest();
+                return this.NotFound();
             }
 
             var user = this.userManager.Users.FirstOrDefault(x => x.Email == loginInput.Email);

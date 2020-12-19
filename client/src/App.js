@@ -14,37 +14,37 @@ function App() {
   return (
     <div className="App">
         <Router history={history}>
-                <Link to='/login'/>
-                <Link to='/register'/>
-                <Link to='/posts'/>
-                <Link to='/feeds' />
-                <Link to='/profile'/>
+            <Link to='/login'/>
+            <Link to='/register'/>
+            <Link to='/posts'/>
+            <Link to='/feeds' />
+            <Link to='/profile'/>
 
-                <Home />
+            <Home />
 
-                <Switch>
-                    <Route path='/login'>
-                        <Login />
-                        <Footer />
-                    </Route>
-                    
-                    <Route path='/register'>
-                        <Register />
-                        <Footer message={'Back to Login?'} link='/login' action='Login'/>
-                        Back to login?
-                        <Link to='/login'>
-                           Login
-                        </Link>   
-                    </Route>
+            <Switch>
+                <Route path='/login'>
+                    <Login />
+                    <Footer />
+                </Route>
+                
+                <Route path='/register'>
+                    <Register />
+                    <Footer message={'Back to Login?'} link='/login' action='Login'/>
+                    Back to login?
+                    <Link to='/login'>
+                       Login
+                    </Link>   
+                </Route>
 
-                    <Route path='/feeds'>
-                        <Feeds />
-                    </Route>
+                <Route path='/feeds'>
+                    <Feeds />
+                </Route>
 
-                    <Route path='/profile'>
-                        <Profile />
-                    </Route>
-                </Switch>
+                <Route path='/profile'>
+                    <Profile />
+                </Route>
+            </Switch>
         </Router>
     </div>
   );

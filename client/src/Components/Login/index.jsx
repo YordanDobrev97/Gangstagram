@@ -12,7 +12,10 @@ class Login extends Component {
         super(props);
 
         this.state = {
-            isLooged: false
+            isLooged: false,
+            errorEmail: '',
+            errorPassword: '',
+            validUser: '',
         };
     }
 
@@ -20,10 +23,28 @@ class Login extends Component {
         const email = this.state.email;
         const password = this.state.password;
 
+        if (!email) {
+            this.setState({
+               errorEmail: 'email is required',
+               email: ''
+            });
+            return false;
+        }
+        
+        if (!password) {
+            this.setState({
+                errorPassword: 'password is required',
+                password: ''
+             });
+            return false;
+        }
+
         const data = JSON.stringify({
            email,
            password
         });
+        console.log(data);
+
        const requestOptions = {
            method: 'POST',
            headers: {
@@ -43,7 +64,13 @@ class Login extends Component {
             this.setState({
                 isLooged: true
             })
+        }).catch(result => {
+            this.setState({
+                validUser: 'not valid data'
+            })
         });
+
+        return true;
     }
     
     getInputValue = (name, value) => {
@@ -69,11 +96,24 @@ class Login extends Component {
                 <div className={styles.wrapper}>
                     <div className={styles['main-content']} />
                     <div className={styles['l-part']}>
-                        <Input type='text' className="input-field" name='email' placeholder="Email" onChange={this.getInputValue.bind(this)} />
+                        <Input type='text' className="input-field" name='email' placeholder="Email" onChange={this.getInputValue.bind(this)} />                       
+                        
+                        {this.state.errorEmail ?
+                            <div style={{color: "red"}} >{this.state.errorEmail}
+                            </div> :
+                        null}
+                        
+                        <Input type="password" className="input-field" name='password' placeholder="Password" onChange={this.getInputValue.bind(this)} />
+                        {this.state.errorPassword ?
+                            <div style={{color: "red"}} >{this.state.errorPassword}
+                            </div> :
+                        null}
+                        
+                         {this.state.validUser ?
+                            <div style={{color: "red"}} >{this.state.validUser}
+                            </div> :
+                        null}
 
-                        <div className={styles['overlap-text']}>
-                            <Input type="password" className="input-field" name='password' placeholder="Password" onChange={this.getInputValue.bind(this)} />
-                        </div>
                         <input type="button" className="standart-btn" value="Log in" onClick={this.login} />
                     </div>
                 </div>
