@@ -1,9 +1,7 @@
-# Gangstagram
-Gangstagram (Similar to Instagram app)
 
-**Home page**
-![homePage](https://user-images.githubusercontent.com/42092212/91895035-3fa5b100-ec9f-11ea-92ce-00cd5077c774.png)
+## :pencil: Project Description
+This is my interpretation of Instagram Application.
 
-**Dashboard page**
-![dashboard](https://user-images.githubusercontent.com/42092212/91895095-577d3500-ec9f-11ea-89cc-f86a557bd933.png)
+**Login**
+![instagram-homepage](https://user-images.githubusercontent.com/42092212/102726312-6f4bf800-4326-11eb-96ff-4701e8e4413d.png)
 
