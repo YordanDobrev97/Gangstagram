@@ -1,16 +1,18 @@
-import React from 'react';
-import './style.css';
+import React from "react";
+import "./style.css";
 
 function Avatar() {
-    return (
-        <header class="photo__header">
-            <img src="https://icons-for-free.com/iconfiles/png/512/avatar+human+people+profile+user+icon-1320168139431219590.png" class="photo__avatar" />
-                <div class="photo__user-info">
-                    <span class="photo__author">inthetiger</span>
-                    <span class="photo__location">Bestechung</span>
-                </div>
-        </header>
-    )
+  return (
+    <header className="w-25 ml-md-2">
+      <img
+        src="https://icons-for-free.com/iconfiles/png/512/avatar+human+people+profile+user+icon-1320168139431219590.png"
+        className="w-25 img-fluid mt-md-2"
+      />
+      <div>
+        <span class="text-dark mr-lg-5">Username</span>
+      </div>
+    </header>
+  );
 }
 
 export default Avatar;

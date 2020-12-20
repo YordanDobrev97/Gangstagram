@@ -1,49 +1,69 @@
-import React, { Component } from 'react'
-import Input from '../Input/input'
+import React, { Component } from "react";
+import Input from "../Input/input";
 
-import './create.css'
+import "./create.css";
 
 class CreatePost extends Component {
-    createPost = (e) => {
-        e.preventDefault();
+  constructor(props) {
+    super(props);
 
-        const content = this.state.content;
-        console.log(content);
-    }
+    this.state = {
+      image: null,
+    };
+  }
 
-    getInputValue = (name, value) => {
-        this.setState({
-            [name]: value
-        });
-    }
+  createPost = (e) => {
+    e.preventDefault();
 
-    render() {
-        return (
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-6 col-xs-12">
-                        <div class="well well-sm well-social-post">
-                            <form>
-                                <ul class="list-inline" id='list_PostActions'>
-                                    <li class='active'><a href='#'>Update status</a></li>
-                                    <input type="file" id="img" name="img" accept="image/*" />
-                                </ul>
-                                <Input type='text' className="input-field" name='content' placeholder="Content" onChange={this.getInputValue.bind(this)} />                       
-                                <ul class='list-inline post-actions'>
-                                    <li><a href="#"><span class="glyphicon glyphicon-camera"></span></a></li>
-                                    <li><a href="#" class='glyphicon glyphicon-user'></a></li>
-                                    <li><a href="#" class='glyphicon glyphicon-map-marker'></a></li>
-                                    <li class='pull-right'><a href="#" class='btn btn-primary btn-xs'>Post</a></li>
-                                </ul>
+    const content = this.state.content;
+    const image = this.state.image;
 
-                                <button className="create-post" onClick={this.createPost}>Upload</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+    const resultImage = new FormData();
+    resultImage.append("postImage", image);
+
+    const data = {
+      content: content,
+      image: resultImage,
+    };
+
+    const options = {
+      method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      body: data,
+    };
+
+    fetch("https://localhost:5001/api/posts/create", options)
+      .then((r) => r.json())
+      .then((r) => console.log(r));
+  };
+
+  handleImage = (event) => {
+    this.setState({
+      image: event.target.files[0],
+    });
+  };
+
+  getInputValue = (name, value) => {
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  render() {
+    return (
+      <div className="container">
+        <div className="row m-auto">
+          <div className="col-md-offset-3 col-md-6 col-xs-12 m-auto">
+            <button>
+              <i className="fa fa-plus" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default CreatePost;

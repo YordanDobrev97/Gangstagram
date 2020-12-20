@@ -1,10 +1,13 @@
-import React from 'react';
-import './style.css';
+import React from "react";
+import "./style.css";
 
 function StatusFollowers() {
-    return (
-        <li><span class="profile-stat-count">188</span> followers</li>
-    )
+  return (
+    <li className="list-group-item d-flex justify-content-between align-items-center">
+      followers
+      <span className="badge badge-primary badge-pill">14</span>
+    </li>
+  );
 }
 
 export default StatusFollowers;
