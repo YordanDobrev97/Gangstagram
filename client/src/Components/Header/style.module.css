@@ -54,3 +54,15 @@
     color: white;
 }
 
+.navigation-logo > img {
+    margin: auto;
+}
+
+.navigation > .profile-container {
+    background: cornsilk;
+    width: 108px;
+    height: 56px;
+    position: absolute;
+    top: 16px;
+    left: 13px;
+}
