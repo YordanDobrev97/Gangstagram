@@ -53,55 +53,52 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
-        <div className={styles.wrapper}>
-          <div className={styles["main-content"]} />
-          <div className={styles["l-part"]}>
+      <div className="row mt-lg-5">
+        <div className="col-md-offset-5 col-md-4 text-center m-md-auto">
+          <Input
+            type="text"
+            name="email"
+            placeholder="Email"
+            style={styles["input-1"]}
+            onChange={this.getInputValue.bind(this)}
+          />
+
+          <Input
+            type="text"
+            name="username"
+            placeholder="Username"
+            style={styles["input-1"]}
+            onChange={this.getInputValue.bind(this)}
+          />
+
+          <div className={styles["overlap-text"]}>
             <Input
-              type="text"
-              name="email"
-              placeholder="Email"
-              style={styles["input-1"]}
+              type="password"
+              name="password"
+              placeholder="Password"
+              style={styles["input-2"]}
               onChange={this.getInputValue.bind(this)}
             />
-
-            <Input
-              type="text"
-              name="username"
-              placeholder="Username"
-              style={styles["input-1"]}
-              onChange={this.getInputValue.bind(this)}
-            />
-
-            <div className={styles["overlap-text"]}>
-              <Input
-                type="password"
-                name="password"
-                placeholder="Password"
-                style={styles["input-2"]}
-                onChange={this.getInputValue.bind(this)}
-              />
-            </div>
-            <div className={styles["overlap-text"]}>
-              <Input
-                type="password"
-                name="repeatPassword"
-                placeholder="repeatPassword"
-                style={styles["input-2"]}
-                onChange={this.getInputValue.bind(this)}
-              />
-            </div>
-
-            <Link to="/login">
-              <button
-                type="submit"
-                className="standart-btn"
-                onClick={this.register}
-              >
-                Register
-              </button>
-            </Link>
           </div>
+          <div className={styles["overlap-text"]}>
+            <Input
+              type="password"
+              name="repeatPassword"
+              placeholder="repeatPassword"
+              style={styles["input-2"]}
+              onChange={this.getInputValue.bind(this)}
+            />
+          </div>
+
+          <Link to="/login">
+            <button
+              type="submit"
+              className="standart-btn"
+              onClick={this.register}
+            >
+              Register
+            </button>
+          </Link>
         </div>
       </div>
     );

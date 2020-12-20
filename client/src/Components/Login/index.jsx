@@ -25,6 +25,7 @@ class Login extends Component {
     const email = this.state.email;
     const password = this.state.password;
 
+    console.log(email, password);
     if (!email) {
       this.setState({
         errorEmail: "email is required",
@@ -95,43 +96,35 @@ class Login extends Component {
     }
 
     return (
-      <div>
-        <div className={styles.wrapper}>
-          <div className={styles["main-content"]} />
-          <div className={styles["l-part"]}>
+      <div className="row mt-lg-5">
+        <div className="col-md-offset-5 col-md-4 text-center m-md-auto">
+          <h1 className="text-white">Welcome to my version of Instagram</h1>
+          <div className="form-login">
+            <h4>Login</h4>
             <Input
               type="text"
-              className="input-field"
               name="email"
-              placeholder="Email"
+              className="form-control input-sm chat-input"
+              placeholder="email"
               onChange={this.getInputValue.bind(this)}
             />
-
-            {this.state.errorEmail ? (
-              <div style={{ color: "red" }}>{this.state.errorEmail}</div>
-            ) : null}
-
             <Input
               type="password"
-              className="input-field"
               name="password"
-              placeholder="Password"
+              className="form-control input-sm chat-input"
+              placeholder="password"
               onChange={this.getInputValue.bind(this)}
             />
-            {this.state.errorPassword ? (
-              <div style={{ color: "red" }}>{this.state.errorPassword}</div>
-            ) : null}
-
-            {this.state.validUser ? (
-              <div style={{ color: "red" }}>{this.state.validUser}</div>
-            ) : null}
-
-            <input
-              type="button"
-              className="standart-btn"
-              value="Log in"
-              onClick={this.login}
-            />
+            <div className="wrapper">
+              <span className="group-btn">
+                <button
+                  className="btn btn-danger btn-md"
+                  onClick={this.login.bind(this)}
+                >
+                  Login <i className="fa fa-sign-in"></i>
+                </button>
+              </span>
+            </div>
           </div>
         </div>
       </div>
