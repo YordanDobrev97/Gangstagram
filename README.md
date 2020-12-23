@@ -11,3 +11,9 @@ This is my interpretation of Instagram Application.
 * [React.js](https://reactjs.org/)
 * [Bootstrap](https://github.com/twbs/bootstrap)
 * Cloudinary
+
+## Author
+
+[Yordan Dobrev](https://github.com/YordanDobrev97)
+
+Give a :star: if you like this project!
