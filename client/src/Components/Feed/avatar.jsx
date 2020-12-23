@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-function Avatar() {
+function Avatar(props) {
   return (
     <header className="w-25 ml-md-2">
       <img
@@ -9,7 +9,7 @@ function Avatar() {
         className="w-25 img-fluid mt-md-2"
       />
       <div>
-        <span class="text-dark mr-lg-5">Username</span>
+        <span class="text-dark mr-lg-5">{props.username}</span>
       </div>
     </header>
   );

@@ -5,7 +5,9 @@ function ProfileImage() {
   return (
     <div class="container mt-md-3">
       <img
-        src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
+        width="200"
+        height="150"
+        src="https://www.kindpng.com/picc/m/381-3817314_transparent-groups-of-people-png-user-icon-round.png"
         alt=""
       />
     </div>

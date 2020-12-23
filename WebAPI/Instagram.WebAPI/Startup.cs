@@ -1,5 +1,7 @@
 namespace Instagram.WebAPI
 {
+    using CloudinaryDotNet;
+
     using Instagram.WebAPI.Data;
     using Instagram.WebAPI.Models;
     using Instagram.WebAPI.Services;
@@ -47,6 +49,7 @@ namespace Instagram.WebAPI
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IPostService, PostService>();
 
             services
                 .AddAuthentication(options =>
@@ -75,6 +78,15 @@ namespace Instagram.WebAPI
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
+
+            Account account = new Account(
+                        this.Configuration["Cloudinary:ApiName"],
+                        this.Configuration["Cloudinary:ApiKey"],
+                        this.Configuration["Cloudinary:ApiSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

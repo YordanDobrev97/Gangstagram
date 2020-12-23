@@ -11,15 +11,6 @@ class Posts extends Component {
     };
   }
 
-  async componentDidMount() {
-    const data = await fetch("http://localhost:3001/user/all").then((r) =>
-      r.json()
-    );
-    this.setState({
-      posts: data,
-    });
-  }
-
   render() {
     const allPosts = this.state.posts.map((post) => {
       if (post.posts.length) {

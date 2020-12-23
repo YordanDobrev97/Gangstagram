@@ -22,7 +22,10 @@
         private readonly SignInManager<User> signInManager;
         private readonly IConfiguration configuration;
 
-        public UsersController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+        public UsersController(
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            IConfiguration configuration)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -82,7 +85,8 @@
 
             var user = this.userManager.Users.FirstOrDefault(x => x.Email == loginInput.Email);
 
-            return new JsonResult(this.GenerateJwtToken(loginInput.Email, user));
+            var token = GenerateJwtToken(loginInput.Email, user);
+            return new JsonResult(token);
         }
 
         private object GenerateJwtToken(string email, IdentityUser user)

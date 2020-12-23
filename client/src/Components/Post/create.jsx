@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Input from "../Input/input";
+import Cookies from "js-cookie";
 
 import "./create.css";
 
@@ -13,30 +14,28 @@ class CreatePost extends Component {
   }
 
   createPost = (e) => {
-    e.preventDefault();
-
     const content = this.state.content;
     const image = this.state.image;
 
-    const resultImage = new FormData();
-    resultImage.append("postImage", image);
+    const reader = new FileReader();
+    reader.onload = (x) => {
+      const formData = new FormData();
+      formData.append("Image", image);
+      formData.append("Content", content);
 
-    const data = {
-      content: content,
-      image: resultImage,
+      const options = {
+        method: "POST",
+        headers: {
+          "X-User-Token": Cookies.get("userId"),
+        },
+        body: formData,
+      };
+
+      fetch("https://localhost:5001/api/posts/create", options)
+        .then((r) => r.json())
+        .then((r) => console.log(r));
     };
-
-    const options = {
-      method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      body: data,
-    };
-
-    fetch("https://localhost:5001/api/posts/create", options)
-      .then((r) => r.json())
-      .then((r) => console.log(r));
+    reader.readAsArrayBuffer(image);
   };
 
   handleImage = (event) => {
@@ -56,9 +55,27 @@ class CreatePost extends Component {
       <div className="container">
         <div className="row m-auto">
           <div className="col-md-offset-3 col-md-6 col-xs-12 m-auto">
-            <button>
+            <label for="formFileSm" className="form-label">
+              Create post
+            </label>
+            <button onClick={this.createPost.bind(this)}>
               <i className="fa fa-plus" aria-hidden="true"></i>
             </button>
+
+            <input
+              className="form-control form-control-sm"
+              type="file"
+              name="image"
+              onChange={this.handleImage.bind(this)}
+            />
+
+            <Input
+              className="form-control text-dark"
+              type="text"
+              name="content"
+              placeholder="Write something text"
+              onChange={this.getInputValue.bind(this)}
+            />
           </div>
         </div>
       </div>

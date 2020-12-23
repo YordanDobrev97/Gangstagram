@@ -5,7 +5,7 @@
     public class LoginInputModel
     {
         [Required]
-        [MinLength(5)]
+        [MinLength(4)]
         public string Email { get; set; }
 
         [Required]
