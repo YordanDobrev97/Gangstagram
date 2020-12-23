@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Input/input";
-import styles from "../Common/style.module.css";
 
 class Register extends Component {
   constructor(props) {
@@ -59,7 +58,6 @@ class Register extends Component {
             type="text"
             name="email"
             placeholder="Email"
-            style={styles["input-1"]}
             onChange={this.getInputValue.bind(this)}
           />
 
@@ -67,25 +65,22 @@ class Register extends Component {
             type="text"
             name="username"
             placeholder="Username"
-            style={styles["input-1"]}
             onChange={this.getInputValue.bind(this)}
           />
 
-          <div className={styles["overlap-text"]}>
+          <div>
             <Input
               type="password"
               name="password"
               placeholder="Password"
-              style={styles["input-2"]}
               onChange={this.getInputValue.bind(this)}
             />
           </div>
-          <div className={styles["overlap-text"]}>
+          <div>
             <Input
               type="password"
               name="repeatPassword"
               placeholder="repeatPassword"
-              style={styles["input-2"]}
               onChange={this.getInputValue.bind(this)}
             />
           </div>

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Input from "../Input/input";
 import Cookies from "js-cookie";
 
-import "./create.css";
-
 class CreatePost extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +51,7 @@ class CreatePost extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row m-auto">
+        <div className="row">
           <div className="col-md-offset-3 col-md-6 col-xs-12 m-auto">
             <label for="formFileSm" className="form-label">
               Create post

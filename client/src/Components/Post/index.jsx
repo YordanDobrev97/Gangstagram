@@ -1,37 +1,38 @@
-import React from 'react';
-import styles from './style.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import Profile from '../Profile/index';
-import LikeButton from './likeButton';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import Profile from "../Profile/index";
+import LikeButton from "./likeButton";
 
 function Post(props) {
-    return (
-        <div className={styles.container}>
+  return (
+    <div>
+      <Profile username={props.username} profileImg={props.profileImg} />
 
-            <Profile username={props.username} profileImg={props.profileImg}/>
+      <main>
+        {props.postData.map((data) => {
+          return (
+            <div>
+              <img src={data.imageUrl} />
+              <p>{data.description}</p>
+            </div>
+          );
+        })}
+      </main>
 
-            <main className={styles.imagePost}>
-                {props.postData.map(data => {
-                   return <div>
-                        <img src={data.imageUrl} />
-                        <p>{data.description}</p> 
-                   </div>
-                })}
+      <footer>
+        <p>
+          <LikeButton />
+          <FontAwesomeIcon icon={faHeart} />
+          {props.likes}
+        </p>
 
-            </main>
-
-            <footer>
-                <p>
-                    <LikeButton />
-                    <FontAwesomeIcon icon={faHeart} />
-                     {props.likes}
-                </p>
-
-                <p><a href='#'>Comments</a></p>
-            </footer>
-        </div>
-    )
+        <p>
+          <a href="#">Comments</a>
+        </p>
+      </footer>
+    </div>
+  );
 }
 
 export default Post;

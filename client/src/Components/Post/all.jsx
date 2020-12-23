@@ -31,7 +31,39 @@ class Posts extends Component {
       <div>
         <Create />
 
-        {/* {allPosts} */}
+        <div class="row mt-md-4 d-flex justify-content-center">
+          <div class="card col-lg-2">
+            <img
+              class="card-img-top"
+              src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+              alt="Card image cap"
+            />
+          </div>
+
+          <div class="card col-lg-2">
+            <img
+              class="card-img-top"
+              src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+              alt="Card image cap"
+            />
+          </div>
+
+          <div class="card col-lg-2">
+            <img
+              class="card-img-top"
+              src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+              alt="Card image cap"
+            />
+          </div>
+
+          <div class="card col-lg-2">
+            <img
+              class="card-img-top"
+              src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+              alt="Card image cap"
+            />
+          </div>
+        </div>
       </div>
     );
   }

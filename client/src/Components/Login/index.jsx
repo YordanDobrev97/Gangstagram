@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import Input from "../Input/input";
-import styles from "../Common/style.module.css";
 import Cookies from "universal-cookie";
 import Feeds from "../Feed/index";
 import { Redirect } from "react-router-dom";
-
-import "../Common/input.css";
 
 const cookies = new Cookies();
 class Login extends Component {
