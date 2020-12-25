@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Input from "../Input/input";
 import Cookies from "js-cookie";
 
@@ -31,7 +32,9 @@ class CreatePost extends Component {
 
       fetch("https://localhost:5001/api/posts/create", options)
         .then((r) => r.json())
-        .then((r) => console.log(r));
+        .then((r) => {
+          return <Redirect to="/feeds" />;
+        });
     };
     reader.readAsArrayBuffer(image);
   };
@@ -53,7 +56,7 @@ class CreatePost extends Component {
       <div className="container">
         <div className="row">
           <div className="col-md-offset-3 col-md-6 col-xs-12 m-auto">
-            <label for="formFileSm" className="form-label">
+            <label htmlFor="formFileSm" className="form-label">
               Create post
             </label>
             <button onClick={this.createPost.bind(this)}>

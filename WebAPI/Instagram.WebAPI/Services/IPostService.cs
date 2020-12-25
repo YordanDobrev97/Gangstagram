@@ -6,8 +6,10 @@
 
     public interface IPostService
     {
-        IEnumerable<AllPostsViewModel> All();
+        IEnumerable<AllPostsViewModel> All(string userId);
 
         bool Create(string userId, string content, IFormFile image);
+
+        IEnumerable<AllPostsViewModel> GetUserPosts(string userId);
     }
 }

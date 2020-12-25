@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
+
 import Post from "./index";
 import Create from "./create";
 
@@ -8,61 +10,61 @@ class Posts extends Component {
 
     this.state = {
       posts: [],
+      isPosts: true,
     };
   }
 
+  async componentDidMount() {
+    await fetch("https://localhost:5001/api/posts/getUserPosts", {
+      headers: {
+        "X-User-Token": Cookies.get("userId"),
+      },
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((data) => {
+        if (data.length == 0) {
+          this.setState({
+            isPosts: false,
+          });
+        } else {
+          this.setState({ posts: data });
+        }
+      })
+      .catch((err) => {});
+  }
+
   render() {
-    const allPosts = this.state.posts.map((post) => {
-      if (post.posts.length) {
-        return (
-          <div>
-            <Post
-              username={post.username}
-              profileImg={post.profileImg}
-              postData={post.posts}
-              likes={post.likes}
-            />
-          </div>
-        );
-      }
-    });
+    if (!this.state.isPosts) {
+      return (
+        <React.Fragment>
+          <Create />
+          <div>No have posts!</div>
+        </React.Fragment>
+      );
+    }
+
+    if (this.state.posts.length == 0) {
+      return <div>Loading...</div>;
+    }
 
     return (
       <div>
         <Create />
 
         <div class="row mt-md-4 d-flex justify-content-center">
-          <div class="card col-lg-2">
-            <img
-              class="card-img-top"
-              src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
-              alt="Card image cap"
-            />
-          </div>
-
-          <div class="card col-lg-2">
-            <img
-              class="card-img-top"
-              src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
-              alt="Card image cap"
-            />
-          </div>
-
-          <div class="card col-lg-2">
-            <img
-              class="card-img-top"
-              src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
-              alt="Card image cap"
-            />
-          </div>
-
-          <div class="card col-lg-2">
-            <img
-              class="card-img-top"
-              src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
-              alt="Card image cap"
-            />
-          </div>
+          {Object.keys(this.state.posts).map((index) => {
+            return (
+              <div class="card col-lg-2">
+                <img
+                  class="card-img-top"
+                  src={this.state.posts[index].image}
+                  alt="Card image cap"
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     );

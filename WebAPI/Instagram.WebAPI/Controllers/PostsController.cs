@@ -33,7 +33,7 @@
         [HttpGet]
         public JsonResult All()
         {
-            var posts = this.postService.All();
+            var posts = this.postService.All(null);
             return new JsonResult(posts);
         }
 
@@ -53,12 +53,21 @@
             return this.Ok();
         }
 
+        public JsonResult GetUserPosts()
+        {
+            var cookie = this.HttpContext.Request.Headers["X-User-Token"];
+            var userId = this.GetUserId(cookie);
+            var posts = this.postService.GetUserPosts(userId);
+            return new JsonResult(posts);
+        }
+
         private string GetUserId(Microsoft.Extensions.Primitives.StringValues cookie)
         {
             var handler = new JwtSecurityTokenHandler();
             var jsonToken = handler.ReadToken(cookie);
             var tokenS = handler.ReadToken(cookie) as JwtSecurityToken;
-            var id = tokenS.Claims.ToList()[2].Value;
+            var id = tokenS.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
+                .FirstOrDefault().Value;
 
             return id;
         }

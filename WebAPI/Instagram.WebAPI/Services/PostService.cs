@@ -23,12 +23,12 @@
             this.cloudinary = cloudinary;
         }
 
-        public IEnumerable<AllPostsViewModel> All()
+        public IEnumerable<AllPostsViewModel> All(string userId)
         {
             var images = this.cloudinary
-                .ListResources().Resources
-                .Select(x => x.Uri.OriginalString)
-                .ToList();
+              .ListResources().Resources
+              .Select(x => x.Uri.OriginalString)
+              .ToList();
 
             var posts = new List<AllPostsViewModel>();
             int index = 0;
@@ -54,15 +54,6 @@
                 return false;
             }
 
-            this.db.Posts.Add(new Post
-            {
-                UserId = userId,
-                CreatedOn = DateTime.UtcNow,
-                Body = content,
-            });
-
-            db.SaveChanges();
-
             byte[] imageBytes;
 
             using var stream = new MemoryStream();
@@ -70,13 +61,56 @@
             imageBytes = stream.ToArray();
 
             var destination = new MemoryStream(imageBytes);
+            var imageName = $"{Guid.NewGuid()}{userId}";
             var uploadParams = new ImageUploadParams()
             {
-                File = new FileDescription(Guid.NewGuid().ToString(), destination),
+                File = new FileDescription(imageName, destination),
             };
             var result = this.cloudinary.Upload(uploadParams);
 
+            var newImage = new Image
+            {
+                Imageurl = result.Url.OriginalString,
+                UserId = userId,
+            };
+            
+            this.db.Images.Add(newImage);
+
+            this.db.Posts.Add(new Post
+            {
+                UserId = userId,
+                CreatedOn = DateTime.UtcNow,
+                Body = content,
+                Image = newImage,
+            });
+
+            db.SaveChanges();
             return true;
+        }
+
+        public IEnumerable<AllPostsViewModel> GetUserPosts(string userId)
+        {
+            if (!this.db.Posts.Any(x => x.UserId == userId))
+            {
+                return new AllPostsViewModel[0];
+            }
+
+            var posts = new List<AllPostsViewModel>();
+            foreach (var item in this.db.Posts
+                .Include(x => x.User)
+                .Include(x => x.Image)
+                .Where(x => x.UserId == userId))
+            {
+                var post = new AllPostsViewModel
+                {
+                    Username = item.User.UserName,
+                    Content = item.Body,
+                    Image = item.Image.Imageurl,
+                };
+                posts.Add(post);
+            }
+
+            return posts;
         }
     }
 }
