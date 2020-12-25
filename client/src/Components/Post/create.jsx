@@ -54,8 +54,8 @@ class CreatePost extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-md-offset-3 col-md-6 col-xs-12 m-auto">
+        <div className="row border w-50">
+          <div className="col-md-offset-3 col-md-6 m-auto">
             <label htmlFor="formFileSm" className="form-label">
               Create post
             </label>
@@ -74,7 +74,7 @@ class CreatePost extends Component {
               className="form-control text-dark"
               type="text"
               name="content"
-              placeholder="Write something text"
+              placeholder="Write something"
               onChange={this.getInputValue.bind(this)}
             />
           </div>

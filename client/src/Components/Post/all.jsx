@@ -56,7 +56,7 @@ class Posts extends Component {
         <div class="row mt-md-4 d-flex justify-content-center">
           {Object.keys(this.state.posts).map((index) => {
             return (
-              <div class="card col-lg-2">
+              <div class="card col-lg-2 mb-md-4">
                 <img
                   class="card-img-top"
                   src={this.state.posts[index].image}
