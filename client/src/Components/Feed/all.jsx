@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 
 import Avatar from "./avatar";
-import PhotoAction from "./action";
-import Comments from "./comments";
+import LikePost from "./LikePost";
+import PostComment from "./comments";
 
 class Feed extends Component {
   constructor(props) {
@@ -42,7 +42,6 @@ class Feed extends Component {
           return (
             <div class="w-50 m-auto bg-light">
               <Avatar username={this.state.posts[index].username} />
-
               <div class="text-center">
                 <img
                   className="w-50 h-25 mx-auto d-block"
@@ -51,8 +50,8 @@ class Feed extends Component {
               </div>
 
               <div>
-                <PhotoAction />
-                <Comments />
+                <LikePost />
+                <PostComment postId={this.state.posts[index].id} />
               </div>
             </div>
           );

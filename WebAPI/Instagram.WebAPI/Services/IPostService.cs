@@ -10,6 +10,9 @@
 
         bool Create(string userId, string content, IFormFile image);
 
+        bool AddComment(string postId, string text, string userId);
+
         IEnumerable<AllPostsViewModel> GetUserPosts(string userId);
+
     }
 }

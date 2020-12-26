@@ -13,6 +13,8 @@
 
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<PostComment> PostComments { get; set; }
+
         public DbSet<Image> Images { get; set; }
     }
 }

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Header from "../Header/index";
-
-import Footer from "../Footer/index";
 import Feed from "./all";
 
 class Feeds extends Component {
@@ -12,7 +10,6 @@ class Feeds extends Component {
         <main id="feed">
           <Feed></Feed>
         </main>
-        <Footer />
       </div>
     );
   }

@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from "react";
 import Comment from "./comment";
-import AddComment from "./addComment";
+import PostComment from "./postComment";
 
 class Comments extends Component {
   render() {
     return (
       <Fragment>
         <ul>
-          <Comment />
+          <Comment postId={this.props.postId} />
         </ul>
       </Fragment>
     );

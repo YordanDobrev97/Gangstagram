@@ -23,6 +23,24 @@
             this.cloudinary = cloudinary;
         }
 
+        public bool AddComment(string postId, string text, string userId)
+        {
+            if (!this.db.Posts.Any(x => x.Id == postId) || 
+                !this.db.Users.Any(x => x.Id == userId))
+            {
+                return false;
+            }
+
+            this.db.PostComments.Add(new PostComment
+            {
+                PostId = postId,
+                UserId = userId,
+                Text = text,
+            });
+            this.db.SaveChanges();
+            return true;
+        }
+
         public IEnumerable<AllPostsViewModel> All(string userId)
         {
             var images = this.cloudinary
@@ -36,6 +54,7 @@
             {
                 var post = new AllPostsViewModel
                 {
+                    Id = item.Id,
                     Username = item.User.UserName,
                     Content = item.Body,
                     Image = images[index],

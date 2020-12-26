@@ -61,6 +61,22 @@
             return new JsonResult(posts);
         }
 
+        [HttpPost]
+        public JsonResult AddComment([FromBody] PostCommentInputModel input)
+        {
+            var cookie = this.HttpContext.Request.Headers["X-User-Token"];
+            var userId = this.GetUserId(cookie);
+
+            var result = this.postService.AddComment(input.PostId, input.Comment, userId);
+
+            if (!result)
+            {
+                return new JsonResult("Not success");
+            }
+
+            return new JsonResult("Successfully added comment");
+        }
+
         private string GetUserId(Microsoft.Extensions.Primitives.StringValues cookie)
         {
             var handler = new JwtSecurityTokenHandler();
