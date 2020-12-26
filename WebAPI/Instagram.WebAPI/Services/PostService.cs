@@ -41,29 +41,26 @@
             return true;
         }
 
-        public IEnumerable<AllPostsViewModel> All(string userId)
+        public bool LikePost(string userId, string postId)
         {
-            var images = this.cloudinary
-              .ListResources().Resources
-              .Select(x => x.Uri.OriginalString)
-              .ToList();
-
-            var posts = new List<AllPostsViewModel>();
-            int index = 0;
-            foreach (var item in this.db.Posts.Include(x => x.User))
+            if (!this.db.Posts.Any(x =>x.Id == postId) || !this.db.Users.Any( x=>x.Id == userId))
             {
-                var post = new AllPostsViewModel
-                {
-                    Id = item.Id,
-                    Username = item.User.UserName,
-                    Content = item.Body,
-                    Image = images[index],
-                };
-                posts.Add(post);
-                index++;
+                return false;
             }
 
-            return posts;
+            if (this.db.PostLikes.Any(x => x.PostId == postId) && this.db.PostLikes.Any(x => x.UserId == userId))
+            {
+                return false;
+            }
+
+            this.db.PostLikes.Add(new PostLike
+            {
+                PostId = postId,
+                UserId = userId,
+            });
+
+            this.db.SaveChanges();
+            return true;
         }
 
         public bool Create(string userId, string content, IFormFile image)
@@ -92,7 +89,7 @@
                 Imageurl = result.Url.OriginalString,
                 UserId = userId,
             };
-            
+
             this.db.Images.Add(newImage);
 
             this.db.Posts.Add(new Post
@@ -105,6 +102,31 @@
 
             db.SaveChanges();
             return true;
+        }
+
+        public IEnumerable<AllPostsViewModel> All(string userId)
+        {
+            var images = this.cloudinary
+              .ListResources().Resources
+              .Select(x => x.Uri.OriginalString)
+              .ToList();
+
+            var posts = new List<AllPostsViewModel>();
+            int index = 0;
+            foreach (var item in this.db.Posts.Include(x => x.User))
+            {
+                var post = new AllPostsViewModel
+                {
+                    Id = item.Id,
+                    Username = item.User.UserName,
+                    Content = item.Body,
+                    Image = images[index],
+                };
+                posts.Add(post);
+                index++;
+            }
+
+            return posts;
         }
 
         public IEnumerable<AllPostsViewModel> GetUserPosts(string userId)
@@ -131,5 +153,6 @@
 
             return posts;
         }
+
     }
 }

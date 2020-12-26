@@ -3,15 +3,18 @@ import React, { Component } from "react";
 class Search extends Component {
   render() {
     return (
-      <nav class="navbar navbar-light bg-dark">
-        <form class="form-inline">
+      <nav className="navbar navbar-light bg-dark">
+        <form className="form-inline">
           <input
-            class="form-control mr-sm-2"
+            className="form-control mr-sm-2"
             type="search"
             placeholder={this.props.message}
             aria-label="Search"
           />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          <button
+            className="btn btn-outline-success my-2 my-sm-0"
+            type="submit"
+          >
             Search
           </button>
         </form>

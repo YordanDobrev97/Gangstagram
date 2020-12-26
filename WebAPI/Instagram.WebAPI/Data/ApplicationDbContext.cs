@@ -15,6 +15,8 @@
 
         public DbSet<PostComment> PostComments { get; set; }
 
+        public DbSet<PostLike> PostLikes { get; set; }
+
         public DbSet<Image> Images { get; set; }
     }
 }

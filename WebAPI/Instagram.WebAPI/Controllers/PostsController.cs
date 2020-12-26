@@ -77,6 +77,21 @@
             return new JsonResult("Successfully added comment");
         }
 
+        public JsonResult LikePost([FromBody] PostLikeViewModel viewModel)
+        {
+            var cookie = this.HttpContext.Request.Headers["X-User-Token"];
+            var userId = this.GetUserId(cookie);
+
+            var result = this.postService.LikePost(userId, viewModel.PostId);
+
+            if (!result)
+            {
+                return new JsonResult("This post not liked successfully");
+            }
+
+            return new JsonResult("This post Liked successfully");
+        }
+
         private string GetUserId(Microsoft.Extensions.Primitives.StringValues cookie)
         {
             var handler = new JwtSecurityTokenHandler();

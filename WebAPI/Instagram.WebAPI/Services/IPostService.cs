@@ -12,6 +12,8 @@
 
         bool AddComment(string postId, string text, string userId);
 
+        bool LikePost(string userId, string postId);
+
         IEnumerable<AllPostsViewModel> GetUserPosts(string userId);
 
     }

@@ -9,15 +9,6 @@ class Users extends Component {
     };
   }
 
-  async componentDidMount() {
-    const data = await fetch("http://localhost:3001/user/all").then((r) =>
-      r.json()
-    );
-    this.setState({
-      users: data,
-    });
-  }
-
   render() {
     const users = this.state.users.map((user) => {
       return (

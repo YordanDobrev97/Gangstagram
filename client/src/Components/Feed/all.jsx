@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 
 import Avatar from "./avatar";
-import LikePost from "./LikePost";
+import LikePost from "./likePost";
 import PostComment from "./comments";
 
 class Feed extends Component {
@@ -50,7 +50,7 @@ class Feed extends Component {
               </div>
 
               <div>
-                <LikePost />
+                <LikePost postId={this.state.posts[index].id} />
                 <PostComment postId={this.state.posts[index].id} />
               </div>
             </div>
