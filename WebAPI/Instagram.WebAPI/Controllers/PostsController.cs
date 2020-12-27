@@ -77,6 +77,7 @@
             return new JsonResult("Successfully added comment");
         }
 
+        [HttpPost]
         public JsonResult LikePost([FromBody] PostLikeViewModel viewModel)
         {
             var cookie = this.HttpContext.Request.Headers["X-User-Token"];
@@ -90,6 +91,13 @@
             }
 
             return new JsonResult("This post Liked successfully");
+        }
+
+        [HttpPost]
+        public JsonResult GetLikeUsersPost([FromBody] PostLikeViewModel viewModel)
+        {
+            var users = this.postService.GetLikeUsersPost(viewModel.PostId);
+            return new JsonResult(users);
         }
 
         private string GetUserId(Microsoft.Extensions.Primitives.StringValues cookie)

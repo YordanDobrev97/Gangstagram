@@ -16,5 +16,7 @@
 
         IEnumerable<AllPostsViewModel> GetUserPosts(string userId);
 
+        IEnumerable<UsersLikePostViewModel> GetLikeUsersPost(string postId);
+
     }
 }

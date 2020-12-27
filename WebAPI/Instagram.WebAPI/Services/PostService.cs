@@ -154,5 +154,13 @@
             return posts;
         }
 
+        public IEnumerable<UsersLikePostViewModel> GetLikeUsersPost(string postId)
+        {
+            return this.db.PostLikes.Where(x => x.PostId == postId)
+                .Select(x => new UsersLikePostViewModel
+                {
+                    Username = x.User.UserName,
+                }).ToList();
+        }
     }
 }

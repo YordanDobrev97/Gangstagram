@@ -8,11 +8,12 @@ class LikePost extends Component {
     this.state = {
       postId: this.props.postId,
       modal: false,
+      users: [],
     };
   }
 
   componentDidMount() {
-    const { postId } = this.state;
+    //TODO...Show like users!
   }
 
   likePost = () => {
@@ -29,41 +30,44 @@ class LikePost extends Component {
       body: JSON.stringify(data),
     })
       .then((r) => r.json())
-      .then((result) => {
-        console.log(result);
-      });
+      .then((result) => {});
   };
 
   showLikeUsers = () => {
-    if (!this.state.modal) {
-      this.setState({
-        modal: true,
+    const { postId } = this.state;
+
+    fetch("https://localhost:5001/api/posts/getLikeUsersPost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ postId }),
+    })
+      .then((r) => r.json())
+      .then((users) => {
+        console.log(users);
+        this.setState({
+          users: users,
+        });
+        if (!this.state.modal) {
+          this.setState({
+            modal: true,
+          });
+        } else {
+          this.setState({
+            modal: false,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    } else {
-      this.setState({
-        modal: false,
-      });
-    }
   };
 
   render() {
     return (
       <Fragment>
         <button className="w-50 h-25 mx-auto d-block" onClick={this.likePost}>
-          <button className="w3-button w3-black" onClick={this.showLikeUsers}>
-            Show likes
-          </button>
-
-          <div
-            style={{ display: this.state.modal ? "block" : "none" }}
-            className="border border-primary"
-          >
-            <div className="container bg-light">
-              <div>User 1</div>
-              <div>User 2</div>
-              <div>User 3</div>
-            </div>
-          </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="14"
@@ -78,6 +82,25 @@ class LikePost extends Component {
             />
           </svg>
         </button>
+        <div className="text-center">
+          <button className="w3-button w3-black" onClick={this.showLikeUsers}>
+            Show likes
+          </button>
+        </div>
+
+        <div
+          style={{ display: this.state.modal ? "block" : "none" }}
+          className="border border-primary"
+        >
+          <div className="container bg-light text-center">
+            {this.state.users.length == 0
+              ? "No have likes"
+              : this.state.users.map((userObj) => {
+                  console.log(userObj);
+                  return <div>{userObj.username}</div>;
+                })}
+          </div>
+        </div>
       </Fragment>
     );
   }
