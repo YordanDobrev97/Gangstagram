@@ -1,6 +1,7 @@
 ﻿namespace Instagram.WebAPI.Controllers
 {
     using Instagram.WebAPI.Models;
+    using Instagram.WebAPI.Services;
     using Instagram.WebAPI.ViewModels.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -21,23 +22,18 @@
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly IConfiguration configuration;
+        private readonly IUsersService usersService;
 
         public UsersController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IUsersService usersService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
-        }
-
-        [HttpGet]
-        public List<int> Home()
-        {
-            int[] numbers = new[] { 1, 2, 3 };
-
-            return numbers.ToList();
+            this.usersService = usersService;
         }
 
         [HttpPost()]
@@ -87,6 +83,13 @@
 
             var token = GenerateJwtToken(loginInput.Email, user);
             return new JsonResult(token);
+        }
+
+        [HttpPost]
+        public JsonResult Search([FromBody] SearchUserViewModel search)
+        {
+            var result = this.usersService.Search(search.Username);
+            return new JsonResult(result);
         }
 
         private object GenerateJwtToken(string email, IdentityUser user)
