@@ -31,7 +31,6 @@ function App() {
           <Route path="/register">
             <Register />
             <Footer message={"Back to Login?"} link="/login" action="Login" />
-            {/* Back to login? */}
             <Link to="/login">Login</Link>
           </Route>
 
@@ -39,9 +38,12 @@ function App() {
             <Feeds />
           </Route>
 
-          <Route path="/profile">
-            <Profile />
-          </Route>
+          <Route
+            path="/profile"
+            render={(props) => {
+              return <Profile {...props} />;
+            }}
+          ></Route>
         </Switch>
       </Router>
     </div>
