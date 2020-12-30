@@ -1,13 +1,14 @@
 import React from "react";
 
+import "./style.css";
+
 function ProfileImage() {
   return (
     <div class="container mt-md-3">
       <img
-        width="100"
-        height="80"
-        src="https://www.kindpng.com/picc/m/381-3817314_transparent-groups-of-people-png-user-icon-round.png"
-        alt=""
+        className="img-profile img-circle img-responsive center-block"
+        src="https://bootdey.com/img/Content/avatar/avatar6.png"
+        alt="Profile image"
       />
     </div>
   );

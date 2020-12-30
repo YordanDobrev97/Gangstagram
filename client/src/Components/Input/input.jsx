@@ -15,7 +15,11 @@ class Input extends Component {
     return (
       <input
         type={this.props.type}
-        className="form-control input-sm chat-input"
+        className={
+          this.props.className
+            ? this.props.className
+            : "form-control input-sm chat-input"
+        }
         name={this.props.name}
         placeholder={this.props.placeholder}
         onChange={this.handler.bind(this)}

@@ -51,14 +51,16 @@ class Posts extends Component {
 
     return (
       <div>
-        <Create />
+        {/* <Create /> */}
 
-        <div class="row mt-md-4 d-flex justify-content-center">
+        <div className="row mt-md-4 d-flex justify-content-center">
           {Object.keys(this.state.posts).map((index) => {
+            console.log(this.state.posts[index]);
             return (
-              <div key={index} class="card col-lg-2 mb-md-4">
+              <div className="col-sm-6 col-md-4 col-lg-3 item">
                 <img
-                  class="card-img-top"
+                  width="100"
+                  height="100"
                   src={this.state.posts[index].image}
                   alt="Card image cap"
                 />

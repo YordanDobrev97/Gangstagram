@@ -1,13 +1,14 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import ProfileImage from "./profileImage";
-import ProfileSettings from "./profileSettings";
-import ProfileStatus from "./profileStatus";
+import CreatePost from "../Post/create";
+
 import Bio from "./profileBio";
 import Posts from "../Post/all";
 import Navigation from "../Navigation/index";
-import history from "../../history";
 
-import { Link } from "react-router-dom";
+import "./style.css";
 
 class Profile extends Component {
   constructor(props) {
@@ -22,26 +23,36 @@ class Profile extends Component {
 
   render() {
     return (
-      <Fragment>
-        <header className="container bg-light w-100">
-          <Navigation />
+      <div class="container">
+        <Navigation />
+        <div class="view-account">
+          <section class="module">
+            <Link to="/feeds">Feeds</Link>
+            <div class="module-inner">
+              <div class="side-bar">
+                <div class="user-info">
+                  <ProfileImage />
+                  <Bio username={this.state.username} />
+                </div>
+              </div>
 
-          <Link to="/feeds">Feeds</Link>
-          <div class="row">
-            <div class="col-md-3 m-auto">
-              <ProfileImage />
+              <div className="content-panel">
+                <div className="content-header-wrapper">
+                  <CreatePost />
+                </div>
+
+                <div className="drive-wrapper drive-grid-view">
+                  <div className="grid-items-wrapper">
+                    <div className="drive-item module text-center">
+                      <Posts />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="col-md-3 m-auto">
-              <ProfileSettings username={this.state.username} />
-            </div>
-            <div className="col-md-3 m-auto">
-              <ProfileStatus />
-            </div>
-            <Bio />
-          </div>
-          <Posts />
-        </header>
-      </Fragment>
+          </section>
+        </div>
+      </div>
     );
   }
 }
