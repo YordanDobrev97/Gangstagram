@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Instagram.WebAPI.ViewModels.Posts
+﻿namespace Instagram.WebAPI.ViewModels.Posts
 {
     public class AllPostsViewModel
     {

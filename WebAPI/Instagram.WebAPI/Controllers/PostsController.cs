@@ -33,7 +33,7 @@
         [HttpGet]
         public JsonResult All()
         {
-            var posts = this.postService.All(null);
+            var posts = this.postService.All();
             return new JsonResult(posts);
         }
 
@@ -53,12 +53,27 @@
             return this.Ok();
         }
 
+        [HttpPost]
         public JsonResult GetUserPosts()
         {
-            var cookie = this.HttpContext.Request.Headers["X-User-Token"];
-            var userId = this.GetUserId(cookie);
-            var posts = this.postService.GetUserPosts(userId);
-            return new JsonResult(posts);
+            var username = this.HttpContext.Request.Headers["X-Username"].ToString();
+
+            var viewModel = new ProfileViewModel();
+
+            if (!string.IsNullOrEmpty(username))
+            {
+                viewModel.Posts = this.postService.GetByUsername(username).ToList();
+                viewModel.Username = username;
+            }
+            else
+            {
+                var cookie = this.HttpContext.Request.Headers["X-User-Token"];
+                var userId = this.GetUserId(cookie);
+                viewModel.Posts = this.postService.GetUserPosts(userId).ToList();
+                viewModel.Username = this.postService.GetUsername(userId);
+            }
+
+            return new JsonResult(viewModel);
         }
 
         [HttpPost]

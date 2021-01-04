@@ -6,7 +6,13 @@
 
     public interface IPostService
     {
-        IEnumerable<AllPostsViewModel> All(string userId);
+        IEnumerable<AllPostsViewModel> All();
+
+        IEnumerable<AllPostsViewModel> GetUserPosts(string userId);
+
+        IEnumerable<AllPostsViewModel> GetByUsername(string username);
+
+       IEnumerable<UsersLikePostViewModel> GetLikeUsersPost(string postId);
 
         bool Create(string userId, string content, IFormFile image);
 
@@ -14,9 +20,6 @@
 
         bool LikePost(string userId, string postId);
 
-        IEnumerable<AllPostsViewModel> GetUserPosts(string userId);
-
-        IEnumerable<UsersLikePostViewModel> GetLikeUsersPost(string postId);
-
+        string GetUsername(string userId);
     }
 }

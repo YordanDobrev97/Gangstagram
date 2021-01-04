@@ -19,6 +19,7 @@ function App() {
         <Link to="/posts" />
         <Link to="/feeds" />
         <Link to="/profile" />
+        <Link to="/searchResult" />
 
         <Home />
 

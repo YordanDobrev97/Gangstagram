@@ -37,8 +37,10 @@ class Search extends Component {
           hasUsername: true,
         });
 
-        history.push("/profile", { username: this.state.username });
-        return <Redirect to="/profile" />;
+        history.push(`/profile?username=${this.state.username}`, {
+          username: this.state.username,
+        });
+        return <Redirect to="/profile?username=" />;
       });
   };
 

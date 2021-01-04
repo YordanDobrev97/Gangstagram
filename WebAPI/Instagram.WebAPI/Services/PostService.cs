@@ -104,26 +104,22 @@
             return true;
         }
 
-        public IEnumerable<AllPostsViewModel> All(string userId)
-        {
-            var images = this.cloudinary
-              .ListResources().Resources
-              .Select(x => x.Uri.OriginalString)
-              .ToList();
-
+        public IEnumerable<AllPostsViewModel> All()
+        {            
             var posts = new List<AllPostsViewModel>();
-            int index = 0;
-            foreach (var item in this.db.Posts.Include(x => x.User))
+
+            foreach (var item in this.db.Posts
+                .Include(x => x.Image)
+                .Include(x => x.User))
             {
                 var post = new AllPostsViewModel
                 {
                     Id = item.Id,
                     Username = item.User.UserName,
                     Content = item.Body,
-                    Image = images[index],
+                    Image = item.Image.Imageurl,
                 };
                 posts.Add(post);
-                index++;
             }
 
             return posts;
@@ -144,7 +140,6 @@
             {
                 var post = new AllPostsViewModel
                 {
-                    Username = item.User.UserName,
                     Content = item.Body,
                     Image = item.Image.Imageurl,
                 };
@@ -161,6 +156,29 @@
                 {
                     Username = x.User.UserName,
                 }).ToList();
+        }
+
+        public string GetUsername(string userId)
+        {
+            return this.db.Users.Where(x => x.Id == userId)
+                .Select(x => x.UserName)
+                .FirstOrDefault();
+
+        }
+
+        public IEnumerable<AllPostsViewModel> GetByUsername(string username)
+        {
+            var posts = this.db.Posts
+                .Where(x => x.User.UserName == username)
+                .Select(x => new AllPostsViewModel
+                {
+                    Id = x.Id,
+                    Content = x.Body,
+                    Image = x.Image.Imageurl,
+                    Username = x.User.UserName,
+                }).ToList();
+
+            return posts;
         }
     }
 }

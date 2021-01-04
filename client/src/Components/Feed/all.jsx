@@ -20,13 +20,9 @@ class Feed extends Component {
         return r.json();
       })
       .then((data) => {
-        //console.log(data)
         this.setState({
           posts: data,
           isLoading: true,
-        });
-        Object.keys(this.state.posts).map((post) => {
-          console.log(this.state.posts[post]);
         });
       });
   }

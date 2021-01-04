@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 
 import ProfileImage from "./profileImage";
@@ -10,18 +10,68 @@ import Navigation from "../Navigation/index";
 
 import "./style.css";
 
+import Cookies from "js-cookie";
+
 class Profile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: this.props.history.location.state
-        ? this.props.history.location.state.username
-        : "Default username",
+      posts: [],
+      isLoading: false,
     };
   }
 
+  async componentDidMount() {
+    let headers = {};
+    if (this.hasSearching()) {
+      headers = {
+        "X-Username": this.props.history.location.state.username,
+      };
+      this.setState({
+        isLoading: true,
+      });
+    } else {
+      headers = {
+        "X-User-Token": Cookies.get("userId"),
+      };
+      this.setState({
+        isLoading: true,
+      });
+    }
+
+    await fetch("https://localhost:5001/api/posts/getUserPosts", {
+      method: "POST",
+      headers: headers,
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((data) => {
+        if (!data) {
+          this.setState({
+            isLoading: false,
+          });
+        } else {
+          this.setState({
+            username: data.username,
+            posts: data.posts,
+            isLoading: true,
+          });
+        }
+      })
+      .catch((err) => {});
+  }
+
+  hasSearching() {
+    return window.location.href.includes("/profile?username=");
+  }
+
   render() {
+    if (!this.state.isLoading) {
+      return <div className="loading-container">Loading...</div>;
+    }
+
     return (
       <div class="container">
         <Navigation />
@@ -37,14 +87,29 @@ class Profile extends Component {
               </div>
 
               <div className="content-panel">
-                <div className="content-header-wrapper">
-                  <CreatePost />
-                </div>
+                {this.hasSearching() ? (
+                  <Fragment></Fragment>
+                ) : (
+                  <div className="content-header-wrapper">
+                    <CreatePost />
+                  </div>
+                )}
 
                 <div className="drive-wrapper drive-grid-view">
                   <div className="grid-items-wrapper">
                     <div className="drive-item module text-center">
-                      <Posts />
+                      <Posts>
+                        {Object.keys(this.state.posts).map((index) => {
+                          console.log(this.state.posts[index]);
+                          return (
+                            <img
+                              width="150"
+                              height="140"
+                              src={this.state.posts[index].image}
+                            />
+                          );
+                        })}
+                      </Posts>
                     </div>
                   </div>
                 </div>
