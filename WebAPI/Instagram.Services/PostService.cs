@@ -4,13 +4,14 @@
     using CloudinaryDotNet.Actions;
     using Instagram.WebAPI.Data;
     using Instagram.WebAPI.Models;
-    using Instagram.WebAPI.ViewModels.Posts;
+    using Instagram.ViewModels.Posts;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Instagram.Services;
 
     public class PostService : IPostService
     {

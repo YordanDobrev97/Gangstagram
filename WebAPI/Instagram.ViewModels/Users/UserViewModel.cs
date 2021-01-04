@@ -1,4 +1,4 @@
-﻿namespace Instagram.WebAPI.ViewModels.Users
+﻿namespace Instagram.ViewModels.Users
 {
     public class UserViewModel
     {

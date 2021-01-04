@@ -1,4 +1,4 @@
-﻿namespace Instagram.WebAPI.ViewModels.Posts
+﻿namespace Instagram.ViewModels.Posts
 {
     public class PostLikeViewModel
     {

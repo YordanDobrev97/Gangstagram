@@ -1,19 +1,14 @@
 ﻿namespace Instagram.WebAPI.Controllers
 {
-    using Instagram.WebAPI.Services;
-    using Instagram.WebAPI.ViewModels.Posts;
+    using Instagram.ViewModels.Posts;
     using Microsoft.AspNetCore.Mvc;
 
     using Microsoft.AspNetCore.Identity;
     using Instagram.WebAPI.Models;
     using System.Security.Claims;
-    using System;
-    using static IdentityModel.ClaimComparer;
-    using System.Text;
-    using Microsoft.AspNetCore.Authentication;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
-    using System.Collections.Generic;
+    using Instagram.Services;
 
     [ApiController]
     [Route("/api/[controller]/[action]")]

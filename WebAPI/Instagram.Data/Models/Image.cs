@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Instagram.WebAPI.Models
+﻿namespace Instagram.WebAPI.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Image
     {
         [Key]

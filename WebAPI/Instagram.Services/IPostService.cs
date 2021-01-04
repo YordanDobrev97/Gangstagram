@@ -1,6 +1,6 @@
-﻿namespace Instagram.WebAPI.Services
+﻿namespace Instagram.Services
 {
-    using Instagram.WebAPI.ViewModels.Posts;
+    using Instagram.ViewModels.Posts;
     using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
 

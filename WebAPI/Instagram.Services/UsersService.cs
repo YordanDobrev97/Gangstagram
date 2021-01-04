@@ -1,8 +1,8 @@
 ﻿namespace Instagram.WebAPI.Services
 {
+    using Instagram.ViewModels.Users;
     using Instagram.WebAPI.Data;
     using Instagram.WebAPI.Models;
-    using Instagram.WebAPI.ViewModels.Users;
     using System.Linq;
 
     public class UsersService : IUsersService

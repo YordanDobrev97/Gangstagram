@@ -1,7 +1,7 @@
 namespace Instagram.WebAPI
 {
     using CloudinaryDotNet;
-
+    using Instagram.Services;
     using Instagram.WebAPI.Data;
     using Instagram.WebAPI.Models;
     using Instagram.WebAPI.Services;
