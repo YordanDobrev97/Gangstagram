@@ -1,14 +1,8 @@
 ﻿namespace Instagram.Models
 {
-    using System.ComponentModel.DataAnnotations;
-
-    public class Image
+    public class Follower
     {
-        [Key]
         public int Id { get; set; }
-
-        [Required]
-        public string Imageurl { get; set; }
 
         public string UserId { get; set; }
 

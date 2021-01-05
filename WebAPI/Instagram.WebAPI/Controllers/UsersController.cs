@@ -1,7 +1,7 @@
 ﻿namespace Instagram.WebAPI.Controllers
 {
     using Instagram.ViewModels.Users;
-    using Instagram.WebAPI.Models;
+    using Instagram.Models;
     using Instagram.WebAPI.Services;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;

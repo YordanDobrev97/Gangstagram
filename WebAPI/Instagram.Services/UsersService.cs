@@ -2,7 +2,7 @@
 {
     using Instagram.ViewModels.Users;
     using Instagram.WebAPI.Data;
-    using Instagram.WebAPI.Models;
+    using Instagram.Models;
     using System.Linq;
 
     public class UsersService : IUsersService

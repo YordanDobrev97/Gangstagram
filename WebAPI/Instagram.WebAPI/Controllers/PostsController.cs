@@ -4,7 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Microsoft.AspNetCore.Identity;
-    using Instagram.WebAPI.Models;
+    using Instagram.Models;
     using System.Security.Claims;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;

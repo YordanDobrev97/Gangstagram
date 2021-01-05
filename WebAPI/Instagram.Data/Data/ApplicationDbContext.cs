@@ -1,6 +1,6 @@
 ﻿namespace Instagram.WebAPI.Data
 {
-    using Instagram.WebAPI.Models;
+    using Instagram.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -18,5 +18,7 @@
         public DbSet<PostLike> PostLikes { get; set; }
 
         public DbSet<Image> Images { get; set; }
+
+        public DbSet<Follower> Followers { get; set; }
     }
 }

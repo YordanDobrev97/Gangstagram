@@ -3,7 +3,7 @@
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
     using Instagram.WebAPI.Data;
-    using Instagram.WebAPI.Models;
+    using Instagram.Models;
     using Instagram.ViewModels.Posts;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;

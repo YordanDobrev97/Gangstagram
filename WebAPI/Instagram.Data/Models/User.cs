@@ -1,4 +1,4 @@
-﻿namespace Instagram.WebAPI.Models
+﻿namespace Instagram.Models
 {
     using Microsoft.AspNetCore.Identity;
     using System;
@@ -10,8 +10,11 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.Posts = new HashSet<Post>();
+            this.Followers = new HashSet<Follower>();
         }
 
         public virtual ICollection<Post> Posts { get; set; }
+
+        public virtual ICollection<Follower> Followers { get; set; }
     }
 }
