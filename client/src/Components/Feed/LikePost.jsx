@@ -12,10 +12,6 @@ class LikePost extends Component {
     };
   }
 
-  componentDidMount() {
-    //TODO...Show like users!
-  }
-
   likePost = () => {
     const data = {
       postId: this.state.postId,

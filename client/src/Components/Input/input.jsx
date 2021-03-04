@@ -18,7 +18,7 @@ class Input extends Component {
         className={
           this.props.className
             ? this.props.className
-            : "form-control input-sm chat-input"
+            : "form-control input-md"
         }
         name={this.props.name}
         placeholder={this.props.placeholder}

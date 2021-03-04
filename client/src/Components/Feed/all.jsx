@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from "react";
 
 import Avatar from "./avatar";
+import FollowBtn from "../Followers/index";
 import LikePost from "./likePost";
 import PostComment from "./comments";
 
+import Cookies from "js-cookie";
 class Feed extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,12 @@ class Feed extends Component {
   }
 
   async componentWillMount() {
-    await fetch("https://localhost:5001/api/posts/all")
+    await fetch("https://localhost:5001/api/posts/all", {
+      headers: {
+        "X-User-Token": Cookies.get("userId"),
+        "Content-Type": "application/json",
+      },
+    })
       .then((r) => {
         return r.json();
       })
@@ -35,9 +42,11 @@ class Feed extends Component {
     return (
       <Fragment>
         {Object.keys(this.state.posts).map((index) => {
+          const username = this.state.posts[index].username;
           return (
             <div class="w-50 m-auto bg-light">
-              <Avatar username={this.state.posts[index].username} />
+              <Avatar username={username} />
+              <FollowBtn username={username} />
               <div class="text-center">
                 <img
                   className="w-50 h-25 mx-auto d-block"

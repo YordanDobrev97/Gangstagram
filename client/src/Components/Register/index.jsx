@@ -3,11 +3,6 @@ import { Link } from "react-router-dom";
 import Input from "../Input/input";
 
 class Register extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
 
   register = () => {
     const email = this.state.email;
@@ -52,50 +47,51 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="row mt-lg-5">
-        <div className="col-md-offset-5 col-md-4 text-center m-md-auto">
-          <Input
-            type="text"
-            name="email"
-            placeholder="Email"
-            onChange={this.getInputValue.bind(this)}
-          />
+      <div>Register page</div>
+      // <div className="row mt-lg-5">
+      //   <div className="col-md-offset-5 col-md-4 text-center m-md-auto">
+      //     <Input
+      //       type="text"
+      //       name="email"
+      //       placeholder="Email"
+      //       onChange={this.getInputValue.bind(this)}
+      //     />
 
-          <Input
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={this.getInputValue.bind(this)}
-          />
+      //     <Input
+      //       type="text"
+      //       name="username"
+      //       placeholder="Username"
+      //       onChange={this.getInputValue.bind(this)}
+      //     />
 
-          <div>
-            <Input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={this.getInputValue.bind(this)}
-            />
-          </div>
-          <div>
-            <Input
-              type="password"
-              name="repeatPassword"
-              placeholder="repeatPassword"
-              onChange={this.getInputValue.bind(this)}
-            />
-          </div>
+      //     <div>
+      //       <Input
+      //         type="password"
+      //         name="password"
+      //         placeholder="Password"
+      //         onChange={this.getInputValue.bind(this)}
+      //       />
+      //     </div>
+      //     <div>
+      //       <Input
+      //         type="password"
+      //         name="repeatPassword"
+      //         placeholder="repeatPassword"
+      //         onChange={this.getInputValue.bind(this)}
+      //       />
+      //     </div>
 
-          <Link to="/login">
-            <button
-              type="submit"
-              className="standart-btn"
-              onClick={this.register}
-            >
-              Register
-            </button>
-          </Link>
-        </div>
-      </div>
+      //     <Link to="/login">
+      //       <button
+      //         type="submit"
+      //         className="standart-btn"
+      //         onClick={this.register}
+      //       >
+      //         Register
+      //       </button>
+      //     </Link>
+      //   </div>
+      // </div>
     );
   }
 }
