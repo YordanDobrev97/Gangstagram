@@ -11,7 +11,7 @@
     using Instagram.Services;
 
     [ApiController]
-    [Route("/api/[controller]/[action]")]
+    [Route("/api/posts/[action]")]
     public class PostsController : ControllerBase
     {
         private readonly IPostService postService;
@@ -28,12 +28,15 @@
         [HttpGet]
         public JsonResult All()
         {
+            //var cookie = this.HttpContext.Request.Headers["X-User-Token"];
+            //var userId = this.GetUserId(cookie);
+
             var posts = this.postService.All();
             return new JsonResult(posts);
         }
 
         [HttpPost]
-        public IActionResult Create([FromForm] PostInputModel postInputModel)
+        public IActionResult Create([FromBody] PostInputModel postInputModel)
         {
             if (!this.ModelState.IsValid)
             {
@@ -43,9 +46,14 @@
             var cookie = this.HttpContext.Request.Headers["X-User-Token"];
 
             string userId = this.GetUserId(cookie);
+  
+            var result = this.postService.Create(userId, postInputModel.Title, postInputModel.Description, postInputModel.Image);
+            if (result)
+            {
+                return Ok("Sucessfully created post");
+            }
 
-            this.postService.Create(userId, postInputModel.Content, postInputModel.Image);
-            return this.Ok();
+            return BadRequest("Not successfully created on post");
         }
 
         [HttpPost]

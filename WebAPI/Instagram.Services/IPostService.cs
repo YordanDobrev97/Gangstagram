@@ -1,7 +1,6 @@
 ﻿namespace Instagram.Services
 {
     using Instagram.ViewModels.Posts;
-    using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
 
     public interface IPostService
@@ -14,7 +13,7 @@
 
        IEnumerable<UsersLikePostViewModel> GetLikeUsersPost(string postId);
 
-        bool Create(string userId, string content, IFormFile image);
+        bool Create(string userId, string title, string content, string image);
 
         bool AddComment(string postId, string text, string userId);
 

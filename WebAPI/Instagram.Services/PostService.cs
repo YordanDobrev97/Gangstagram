@@ -64,30 +64,30 @@
             return true;
         }
 
-        public bool Create(string userId, string content, IFormFile image)
+        public bool Create(string userId, string title, string content, string image)
         {
             if (!this.db.Users.Any(x => x.Id == userId))
             {
                 return false;
             }
 
-            byte[] imageBytes;
+            //byte[] imageBytes;
 
-            using var stream = new MemoryStream();
-            image.CopyTo(stream);
-            imageBytes = stream.ToArray();
+            //using var stream = new MemoryStream();
+            //image.CopyTo(stream);
+            //imageBytes = stream.ToArray();
 
-            var destination = new MemoryStream(imageBytes);
-            var imageName = $"{Guid.NewGuid()}{userId}";
-            var uploadParams = new ImageUploadParams()
-            {
-                File = new FileDescription(imageName, destination),
-            };
-            var result = this.cloudinary.Upload(uploadParams);
+            //var destination = new MemoryStream(imageBytes);
+            //var imageName = $"{Guid.NewGuid()}{userId}";
+            //var uploadParams = new ImageUploadParams()
+            //{
+            //    File = new FileDescription(imageName, destination),
+            //};
+            //var result = this.cloudinary.Upload(uploadParams);
 
             var newImage = new Image
             {
-                Imageurl = result.Url.OriginalString,
+                Imageurl = image,
                 UserId = userId,
             };
 
@@ -97,6 +97,7 @@
             {
                 UserId = userId,
                 CreatedOn = DateTime.UtcNow,
+                Title = title,
                 Body = content,
                 Image = newImage,
             });
@@ -106,7 +107,7 @@
         }
 
         public IEnumerable<AllPostsViewModel> All()
-        {            
+        {
             var posts = new List<AllPostsViewModel>();
 
             foreach (var item in this.db.Posts
@@ -117,6 +118,7 @@
                 {
                     Id = item.Id,
                     Username = item.User.UserName,
+                    Title = item.Title,
                     Content = item.Body,
                     Image = item.Image.Imageurl,
                 };

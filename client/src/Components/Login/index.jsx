@@ -4,21 +4,19 @@ import Cookies from "universal-cookie";
 import Feeds from "../Feed/index";
 import { Redirect } from "react-router-dom";
 import LoginService from '../../Services/login';
+import { UserProvider } from '../../UserContext';
 
 import {Box} from '@material-ui/core'
 import { Button } from '@material-ui/core';
 
 const cookies = new Cookies();
+
 class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLooged: false,
-      errorEmail: "",
-      errorPassword: "",
-      validUser: "",
-      user: cookies.get("userId"),
+      isLogged: false,
     };
   }
 
@@ -26,9 +24,11 @@ class Login extends Component {
     const email = this.state.email;
     const password = this.state.password;
 
-    const result = await LoginService.login(email, password);
-    
-    return true;
+    const result = await LoginService.login(email, password);    
+    this.setState({
+      isLooged: result,
+    });
+    this.props.isLogged(result);
   };
 
   getInputValue = (name, value) => {
@@ -38,7 +38,7 @@ class Login extends Component {
   };
 
   render() {
-    const isLooged = cookies.get("userId");
+    const isLooged = this.state.isLooged;
 
     if (isLooged) {
       return (

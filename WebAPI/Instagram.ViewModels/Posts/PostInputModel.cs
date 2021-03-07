@@ -1,14 +1,16 @@
 ﻿namespace Instagram.ViewModels.Posts
 {
-    using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
 
     public class PostInputModel
     {
         [Required]
-        public string Content { get; set; }
+        public string Title { get; set; }
 
         [Required]
-        public IFormFile Image { get; set; }
+        public string Description { get; set; }
+
+        [Required]
+        public string Image { get; set; }
     }
 }

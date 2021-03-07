@@ -1,83 +1,98 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import Input from "../Input/input";
 import Cookies from "js-cookie";
 
-import history from "../../history";
-import "./create.css";
+import {Box, Button, Input, TextField } from '@material-ui/core';
+import PostService from '../../Services/post';
 
 class CreatePost extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      image: null,
+      title: '',
+      description: '',
+      image: '',
+      created: false,
     };
   }
 
-  createPost = (e) => {
-    const content = this.state.content;
+  createPost = async (e) => {
+    const title = this.state.title;
+    const description = this.state.description;
     const image = this.state.image;
 
-    const reader = new FileReader();
-    reader.onload = (x) => {
-      const formData = new FormData();
-      formData.append("Image", image);
-      formData.append("Content", content);
-
-      const options = {
-        method: "POST",
-        headers: {
-          "X-User-Token": Cookies.get("userId"),
-        },
-        body: formData,
-      };
-
-      fetch("https://localhost:5001/api/posts/create", options)
-        .then((r) => r.json())
-        .then((r) => {
-          history.push("/profile", { username: this.state.username });
-          return <Redirect to="/profile" />;
-        });
-    };
-    reader.readAsArrayBuffer(image);
+    const result = await PostService.create(title, description, image);
+    if (result) {
+      this.setState({
+        created: true
+      })
+    }
   };
 
   handleImage = (event) => {
-    this.setState({
-      image: event.target.files[0],
-    });
-  };
-
-  getInputValue = (name, value) => {
-    this.setState({
-      [name]: value,
-    });
+    const image = event.target.files[0];
+    const reader = new FileReader();
+    const url = reader.readAsDataURL(image);
+   
+    reader.onloadend = function (e) {
+      this.setState({
+        image: reader.result,
+      })
+      const imageUrl = reader.result;
+    }.bind(this);
   };
 
   render() {
+    if (this.state.created) {
+      return (<Redirect to='/feeds' />)
+    }
+
     return (
-      <div className="create-form">
-        <label htmlFor="formFileMd">Create post</label>
-        <button onClick={this.createPost.bind(this)}>
-          <i className="fa fa-plus" aria-hidden="true"></i>
-        </button>
+     <form>
+        <Box marginTop={3}>
+          <Box borderColor="primary.main" color="text.primary" paddingBottom={2}>
+            Create New Post
+          </Box>
 
-        <input
-          className="form-control form-control-md w-50"
-          type="file"
-          name="image"
-          onChange={this.handleImage.bind(this)}
-        />
+          <Box>
+            <TextField onChange={(e) => {
+              this.setState({
+                title: e.target.value
+              })
+            }} name="title" label="Title" />
+          </Box>
 
-        <Input
-          className="input-post"
-          type="text"
-          name="content"
-          placeholder="Write something"
-          onChange={this.getInputValue.bind(this)}
-        />
-      </div>
+          <Box>
+            <TextField onChange={(e) => {
+              this.setState({
+                description: e.target.value,
+              })
+            }} name="description" label="Description" />
+          </Box>
+
+          <Box marginTop={2}>
+            <Button variant="contained" component="label">
+              Upload File
+              <input name="image" onChange={this.handleImage.bind(this)}
+                type="file"
+                hidden
+              />
+            </Button>
+
+            <Box marginTop={2}>
+              <Button onClick={this.createPost.bind(this)} color="secondary" variant="contained" component="label" style={{ borderRadius: 50,
+              background: 'orange' }}>
+                Save
+              </Button>
+            </Box>
+
+            <Box>
+              <img src={this.state.image}/>
+            </Box>
+        </Box>
+      </Box>
+     </form>
     );
   }
 }

@@ -1,42 +1,31 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import  { Redirect } from 'react-router-dom'
 import Input from "../Input/input";
+import RegisterService from '../../Services/register';
+
+import {Box} from '@material-ui/core'
+import { Button } from '@material-ui/core';
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
 
-  register = () => {
+    this.state = {
+      isRegistered: false,
+    }
+  }
+
+  register = async () => {
     const email = this.state.email;
-    const username = this.state.username;
+    const username = email;
     const password = this.state.password;
     const repeatPassword = this.state.repeatPassword;
 
-    if (password !== repeatPassword) {
-      return;
-    }
-
-    const data = JSON.stringify({
-      email,
-      username,
-      password,
+    const result = await RegisterService.register(username, email, password, repeatPassword);
+    console.log(result);
+    this.setState({
+      isRegistered: result
     });
-    console.log(data);
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
-      },
-      body: data,
-    };
-
-    fetch("https://localhost:5001/api/users/Register", requestOptions)
-      .then((res) => res.json())
-      .catch((err) => {
-        console.log(err);
-      })
-      .then((data) => {
-        console.log(data);
-      });
   };
 
   getInputValue = (name, value) => {
@@ -46,52 +35,28 @@ class Register extends Component {
   };
 
   render() {
+
+    if (this.state.isRegistered) {
+      return <Redirect to='/login' />
+    }
+
     return (
-      <div>Register page</div>
-      // <div className="row mt-lg-5">
-      //   <div className="col-md-offset-5 col-md-4 text-center m-md-auto">
-      //     <Input
-      //       type="text"
-      //       name="email"
-      //       placeholder="Email"
-      //       onChange={this.getInputValue.bind(this)}
-      //     />
-
-      //     <Input
-      //       type="text"
-      //       name="username"
-      //       placeholder="Username"
-      //       onChange={this.getInputValue.bind(this)}
-      //     />
-
-      //     <div>
-      //       <Input
-      //         type="password"
-      //         name="password"
-      //         placeholder="Password"
-      //         onChange={this.getInputValue.bind(this)}
-      //       />
-      //     </div>
-      //     <div>
-      //       <Input
-      //         type="password"
-      //         name="repeatPassword"
-      //         placeholder="repeatPassword"
-      //         onChange={this.getInputValue.bind(this)}
-      //       />
-      //     </div>
-
-      //     <Link to="/login">
-      //       <button
-      //         type="submit"
-      //         className="standart-btn"
-      //         onClick={this.register}
-      //       >
-      //         Register
-      //       </button>
-      //     </Link>
-      //   </div>
-      // </div>
+      <form>
+        <Box component="div" marginBottom={2}>
+          <Input type="text" name="email" className="form-control input-sm" placeholder="email" onChange={this.getInputValue.bind(this)} />
+        </Box>
+        <Box component="div" marginBottom={2}>
+          <Input type="password" name="password" className="form-control input-sm" placeholder="password" onChange={this.getInputValue.bind(this)} />
+        </Box>
+        <Box component="div" marginBottom={2}>
+          <Input type="password" name="repeatPassword" className="form-control input-sm" placeholder="repeat password" onChange={this.getInputValue.bind(this)} />
+        </Box>
+        <Box>
+          <Button color="primary" onClick={this.register.bind(this)}>
+            Register <i className="fa fa-sign-in"></i>
+          </Button>
+        </Box>
+      </form>
     );
   }
 }

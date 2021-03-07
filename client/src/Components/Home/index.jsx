@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
     Link,
     Route,
@@ -14,15 +14,44 @@ import { Button } from '@material-ui/core';
 
 import Login from '../Login/index';
 import Register from "../Register/index";
+import Feeds from '../Feed/all';
+import CreatePost from '../Post/create';
+
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 class Home extends Component {
+    
+    state = {
+        isAuthentication: cookies.get('userId') || false,
+        isClickCreatePost: false,
+    };
+
+    isLoggedUser = (isLogged) => {
+        this.setState({
+            isAuthentication: isLogged,
+        });
+    }
+
+    createPost = () => {
+        this.setState({
+            isClickCreatePost: true
+        });
+    }
+
     render() {
+        if (this.state.isClickCreatePost) {
+            return (<Redirect to='/createPost'/>)
+        }
+
         return (
             <Container maxWidth="lg">
                 <Router>
                     <Link to="/" />
                     <Link to="/login" />
                     <Link to="/register" />
+                    <Link to="/feeds" />
+                    <Link to="/createPost" />
 
                     <AppBar display="flex" mb={4} position="static" color="transparent">
                     <Box>
@@ -31,24 +60,40 @@ class Home extends Component {
                         </h1>
                     </Box>
 
-                    <Box>
-                        <Button fullWidth={false} size="medium" color="primary" href="/register">
-                            Register
-                        </Button>
-                    </Box>
-                    <Box>
-                        <Button fullWidth={false} size="medium" color="primary" href="/login">
-                            Login
-                        </Button>
-                    </Box>
+                    {this.state.isAuthentication ? (
+                        <Box textAlign='center'>
+                            <Button onClick={this.createPost.bind(this)} style={{Width: '50px',}} variant="contained" color="primary" component="span">
+                                Add Post
+                            </Button>
+                        </Box>
+                    ) : (
+                        <Fragment>
+                            <Box>
+                                <Button fullWidth={false} size="medium" color="primary" href="/register">
+                                    Register
+                                </Button>
+                            </Box>
+                            <Box>
+                                <Button fullWidth={false} size="medium" color="primary" href="/login">
+                                    Login
+                                </Button>
+                            </Box>
+                        </Fragment>
+                    )}
                 </AppBar>
 
                     <Switch>
                         <Route path="/login">
-                            <Login />
+                            <Login isLogged={this.isLoggedUser.bind(this)}/>
                         </Route>
                         <Route path="/register">
                             <Register />
+                        </Route>
+                        <Route path="/feeds">
+                            <Feeds />
+                        </Route>
+                        <Route path="/createPost">
+                            <CreatePost />
                         </Route>
                         <Route path='/'>
                             <h1>Welcome to Gangstagram, custom version of <span className="instagram">Instagram</span></h1>

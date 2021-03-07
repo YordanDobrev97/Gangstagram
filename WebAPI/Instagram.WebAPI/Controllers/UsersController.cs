@@ -65,21 +65,20 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.BadRequest(new 
+                return this.BadRequest(new
                 {
                     code = 400,
                     message = "Not valid data"
                 });
             }
 
-            var result = await this.signInManager.PasswordSignInAsync(loginInput.Email, loginInput.Password, true, true);
-
+            var result = await this.signInManager.PasswordSignInAsync(loginInput.Email, loginInput.Password, true, false);
             if (!result.Succeeded)
             {
                 return this.NotFound();
             }
 
-            var user = this.userManager.Users.FirstOrDefault(x => x.Email == loginInput.Email);
+            var user = this.userManager.Users.FirstOrDefault(x => x.UserName == loginInput.Email);
 
             var token = GenerateJwtToken(loginInput.Email, user);
             return new JsonResult(token);
@@ -97,7 +96,6 @@
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Email, email),
                 new Claim(ClaimTypes.Name, user.UserName),
             };
 
