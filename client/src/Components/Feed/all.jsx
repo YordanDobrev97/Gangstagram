@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import 
   {
+    Button,
     Avatar, 
     Grid, 
     Card, 
@@ -8,12 +9,15 @@ import
     CardContent,
     Typography,
     Box,
-    Link } from '@material-ui/core'
+    Link,
+    Icon
+   } from '@material-ui/core'
 
 // import Avatar from "./avatar";
 import FollowBtn from "../Followers/index";
 import LikePost from "./likePost";
 import PostComment from "./comments";
+import CommentService from '../../Services/comment';
 
 import Cookies from "js-cookie";
 class Feed extends Component {
@@ -23,6 +27,8 @@ class Feed extends Component {
     this.state = {
       posts: [],
       isLoading: false,
+      comment: '',
+      postId: '',
     };
   }
 
@@ -43,6 +49,15 @@ class Feed extends Component {
           isLoading: true,
         });
       });
+  }
+
+  addComment = async () => {
+    const result = await CommentService.add(this.state.comment, this.state.postId);
+    if (result) {
+      this.setState({
+        comment: '',
+      })
+    }
   }
 
   render() {
@@ -66,25 +81,43 @@ class Feed extends Component {
                     style={{float: "left"}}
                     alt="user avatar" 
                     src="https://lh3.googleusercontent.com/proxy/hsEZAqJ7dbVeBH3F_c5dvDAeajS9CkX8WJ_Z3CQ8JgVBP6EsK_Bqau1MZZp41g7b5ng0EJcOT2W2JICHkVywrhrVA8ZMFAr5dXnL0UdhjwD_oIgOntId2SuQFCjp" />
-                    <Link href={this.state.posts[index].id}>
+                    <Link href={this.state.posts[index].userId} style={{ float: "left" }}>
                     {this.state.posts[index].username}
                   </Link>
                 </Box>
                 
                 <CardContent style={{margin: "auto"}}>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h5" component="h2" 
+                  style={{ marginRight: "95px" }}>
                     {this.state.posts[index].title}
                   </Typography>
 
                   <CardMedia 
                     image={this.state.posts[index].image} 
                     component="img" 
-                    style={{width: "450px", height: "180px", margin: "0 auto"}}/> 
+                    style={{width: "50%", height: "180px", margin: "0 auto"}}/> 
 
-                  <Typography variant="body2" color="textSecondary" component="p">
+                  <Typography variant="body2" color="textSecondary" component="p" 
+                  style={{ borderStyle: "groove", padding: "8px", width: "50%", margin: "auto" }}>
                     {this.state.posts[index].content}
                   </Typography>
                 </CardContent>
+
+                <input type="text" placeholder="Add comment" onChange={(e) => {
+                    this.setState({
+                      comment: e.target.value,
+                      postId: this.state.posts[index].id,
+                    })
+                }}/>
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  endIcon={<Icon>send</Icon>}
+                  style={{marginLeft: "10px", marginBottom: "5px" }}
+                  onClick={this.addComment.bind(this)} >
+                  Send
+                </Button>
               </Card>
             </Grid>
             // <div class="w-50 m-auto bg-light">

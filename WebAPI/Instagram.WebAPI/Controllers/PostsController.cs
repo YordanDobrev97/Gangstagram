@@ -80,7 +80,7 @@
         }
 
         [HttpPost]
-        public JsonResult AddComment([FromBody] PostCommentInputModel input)
+        public IActionResult AddComment([FromBody] PostCommentInputModel input)
         {
             var cookie = this.HttpContext.Request.Headers["X-User-Token"];
             var userId = this.GetUserId(cookie);
@@ -89,10 +89,10 @@
 
             if (!result)
             {
-                return new JsonResult("Not success");
+                return BadRequest();
             }
 
-            return new JsonResult("Successfully added comment");
+            return Ok("Successfully added comment");
         }
 
         [HttpPost]

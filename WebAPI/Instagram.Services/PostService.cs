@@ -118,6 +118,7 @@
                 {
                     Id = item.Id,
                     Username = item.User.UserName,
+                    UserId = item.User.Id,
                     Title = item.Title,
                     Content = item.Body,
                     Image = item.Image.Imageurl,
