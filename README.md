@@ -19,6 +19,10 @@ This is my interpretation of Instagram Application.
 **Login Page**
 ![login](https://user-images.githubusercontent.com/42092212/110245643-c5672980-7f6c-11eb-850a-f1381c42db82.png)
 
+**Feeds Page**
+![feeds](https://user-images.githubusercontent.com/42092212/110248373-60fe9700-7f79-11eb-9c65-9393b23bc3bf.png)
+
+
 
 ## Author
 
