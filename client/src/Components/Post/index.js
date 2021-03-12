@@ -7,7 +7,7 @@ import LikeButton from "./likeButton";
 function Post(props) {
   return (
     <div>
-      <Profile username={props.username} profileImg={props.profileImg} />
+      {/* <Profile username={props.username} profileImg={props.profileImg} /> */}
 
       <main>
         {props.postData.map((data) => {

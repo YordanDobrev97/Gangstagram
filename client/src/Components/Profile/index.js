@@ -74,7 +74,7 @@ class Profile extends Component {
 
     return (
       <div class="container">
-        <Navigation />
+        {/* <Navigation /> */}
         <div class="view-account">
           <section class="module">
             <Link to="/feeds">Feeds</Link>

@@ -62,8 +62,18 @@ class Navigation extends Component {
           {this.context[0].isAuth ? (
             <Box textAlign="center">
               <Button
+                href="/myProfile"
+                style={{ Width: "50px", float: "left", marginBottom: "10px" }}
+                variant="contained"
+                color="primary"
+                component="button"
+              >
+                My Profile
+              </Button>
+
+              <Button
                 onClick={this.createPost.bind(this)}
-                style={{ Width: "50px", marginLeft: "100px" }}
+                style={{ Width: "50px" }}
                 variant="contained"
                 color="primary"
                 component="button"
