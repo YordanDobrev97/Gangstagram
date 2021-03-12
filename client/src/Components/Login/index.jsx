@@ -24,10 +24,11 @@ class Login extends Component {
     const password = this.state.password;
 
     const result = await LoginService.login(email, password);
-    console.log(result)
     if (result) {
-      this.context.username = email;
-      this.context.isAuth = true;
+      this.context[1]({
+        username: email,
+        isAuth: true
+      })
       this.setState({
         isRedirect: true,
       })

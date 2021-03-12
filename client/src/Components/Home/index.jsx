@@ -24,18 +24,36 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 class Home extends Component {
-    
-    state = {
-        isAuthentication: cookies.get('userId') || false,
-        isClickCreatePost: false,
-    };
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            isLoggedIn: false,
+            isClickCreatePost: false,
+            isClickLogout:false,
+        };
+    }
 
     static contextType = UserContext
 
-    isLoggedUser = (isLogged) => {
+    componentDidMount() {
         this.setState({
-            isAuthentication: isLogged,
+            isLoggedIn: this.context[0].isAuth,
+        })
+    }
+    
+    logout = () => {
+        this.context[1]({
+            username: null,
+            isAuth: false
         });
+
+        console.log(this.context);
+
+        document.cookie = 'userId' +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        this.setState({
+            isClickLogout: true
+        })
     }
 
     createPost = () => {
@@ -45,6 +63,10 @@ class Home extends Component {
     }
 
     render() {
+        if (this.state.isClickLogout) {
+            return (<Redirect to='/' />)
+        }
+
         if (this.state.isClickCreatePost) {
             return (<Redirect to='/createPost'/>)
         }
@@ -61,39 +83,43 @@ class Home extends Component {
 
                     <AppBar display="flex" mb={4} position="static" color="transparent">
                     
-                    <Box>
-                        <h1>
-                            <a href='/'>Gangstagram</a>
-                        </h1>
-                        {this.context.isAuth ? (
-                            <p>Hello, {this.context.username}</p>
-                        )  : (
-                            <React.Fragment></React.Fragment>
-                        )}
-                    </Box>
+                        <Box>
+                            <h1>
+                                <a href={this.context[0].isAuth ? '/feeds': '/'}>Gangstagram</a>
+                            </h1>
+                            {this.context[0].isAuth ? (
+                                <p>Hello, {this.context[0].username}</p>
+                            )  : (
+                                <React.Fragment></React.Fragment>
+                            )}
+                        </Box>
                     
 
-                    {this.state.isAuthentication ? (
-                        <Box textAlign='center'>
-                            <Button onClick={this.createPost.bind(this)} style={{Width: '50px',}} variant="contained" color="primary" component="span">
-                                Add Post
-                            </Button>
-                        </Box>
-                    ) : (
-                        <Fragment>
-                            <Box>
-                                <Button fullWidth={false} size="medium" color="primary" href="/register">
-                                    Register
+                        {this.context[0].isAuth ? (
+                            <Box textAlign='center'>
+                                <Button onClick={this.createPost.bind(this)} style={{Width: '50px', marginLeft: '100px'}} variant="contained" color="primary" component="button">
+                                    Add Post
+                                </Button>
+
+                                <Button onClick={this.logout.bind(this)} style={{Width: '50px', float: 'right'}} variant="contained" color="secondary" component="button">
+                                    Logout
                                 </Button>
                             </Box>
-                            <Box>
-                                <Button fullWidth={false} size="medium" color="primary" href="/login">
-                                    Login
-                                </Button>
-                            </Box>
-                        </Fragment>
-                    )}
-                </AppBar>
+                        ) : (
+                            <Fragment>
+                                <Box>
+                                    <Button fullWidth={false} size="medium" color="primary" href="/register">
+                                        Register
+                                    </Button>
+                                </Box>
+                                <Box>
+                                    <Button fullWidth={false} size="medium" color="primary" href="/login">
+                                        Login
+                                    </Button>
+                                </Box>
+                            </Fragment>
+                        )}
+                    </AppBar>
 
                     <Switch>
                         <Route path="/login">

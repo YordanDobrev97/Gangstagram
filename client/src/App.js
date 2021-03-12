@@ -27,7 +27,7 @@ function App() {
   const [user, setUser] = useState(userData);
   return (
     <div className="App">
-      <UserContext.Provider value={userData}>
+      <UserContext.Provider value={[userData, setUser]}>
         <Home />
       </UserContext.Provider>
     </div>
