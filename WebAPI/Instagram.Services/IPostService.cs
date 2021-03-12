@@ -11,7 +11,7 @@
 
         IEnumerable<AllPostsViewModel> GetByUsername(string username);
 
-       IEnumerable<UsersLikePostViewModel> GetLikeUsersPost(string postId);
+       GetByIdViewModel GetById(string postId);
 
         bool Create(string userId, string title, string content, string image);
 

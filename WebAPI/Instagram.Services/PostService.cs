@@ -153,13 +153,26 @@
             return posts;
         }
 
-        public IEnumerable<UsersLikePostViewModel> GetLikeUsersPost(string postId)
+        public GetByIdViewModel GetById(string postId)
         {
-            return this.db.PostLikes.Where(x => x.PostId == postId)
-                .Select(x => new UsersLikePostViewModel
+            var image = this.db.Posts
+                .Where(x => x.Id == postId)
+                .Select(x => x.Image.Imageurl)
+                .FirstOrDefault();
+
+            var comments = this.db.PostComments
+                .Where(x => x.PostId == postId)
+                .Select(x => new GetByIdPostViewModel
                 {
                     Username = x.User.UserName,
-                }).ToList();
+                    Content = x.Text
+                }).ToArray();
+
+            return new GetByIdViewModel
+            {
+                Image = image,
+                GetByIdPosts = comments,
+            };
         }
 
         public string GetUsername(string userId)

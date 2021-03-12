@@ -97,7 +97,7 @@ class Home extends Component {
 
                     <Switch>
                         <Route path="/login">
-                            <Login isLogged={this.isLoggedUser.bind(this)}/>
+                            <Login />
                         </Route>
                         <Route path="/register">
                             <Register />
@@ -105,8 +105,9 @@ class Home extends Component {
                         <Route path="/feeds">
                             <Feeds />
                         </Route>
-                        <Route path="/feed/:id">
-                            <Details />
+                        <Route path="/feed/:id" render={(props) => {
+                            return <Details id={props.match.params.id} />
+                        }}>
                         </Route>
                         <Route path="/createPost">
                             <CreatePost />

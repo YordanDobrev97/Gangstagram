@@ -112,10 +112,10 @@
         }
 
         [HttpPost]
-        public JsonResult GetLikeUsersPost([FromBody] PostLikeViewModel viewModel)
+        public JsonResult GetById([FromBody] PostLikeViewModel viewModel)
         {
-            var users = this.postService.GetLikeUsersPost(viewModel.PostId);
-            return new JsonResult(users);
+            var data = this.postService.GetById(viewModel.PostId);
+            return new JsonResult(data);
         }
 
         private string GetUserId(Microsoft.Extensions.Primitives.StringValues cookie)

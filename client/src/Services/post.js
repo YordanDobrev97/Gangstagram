@@ -25,4 +25,26 @@ export default class PostService {
 
     return result.status === 200;
   };
+
+  static getById = async (id) => {
+    const data = JSON.stringify({
+      postId: id,
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-User-Token": cookies.get("userId"),
+      },
+      body: data,
+    };
+
+    const result = await fetch(
+      "https://localhost:5001/api/posts/getById",
+      requestOptions
+    );
+
+    return result;
+  };
 }
