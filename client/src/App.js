@@ -1,25 +1,35 @@
-import React from "react";
-import {
-  Link,
-  Route,
-  Switch,
-  BrowserRouter as Router,
-  Redirect,
-} from "react-router-dom";
-import Login from "./Components/Login/index";
-import Register from "./Components/Register/index";
-import history from "./history";
-import Footer from "./Components/Footer/index";
-import Feeds from "./Components/Feed/index";
+import React, { useState } from "react";
+
 import Home from "./Components/Home/index";
-import Profile from "./Components/Profile/index";
+import UserContext from "./UserContext";
 
 import "./App.css";
 
+import Cookies from "universal-cookie";
+import jwt_decode from "jwt-decode";
+
+const cookies = new Cookies();
+
 function App() {
+  const token = cookies.get("userId");
+
+  const userData = {
+    username: null,
+    isAuth: false,
+  };
+
+  if (token) {
+    const decodeToken = jwt_decode(token);
+    userData.username = decodeToken.username;
+    userData.isAuth = true;
+  }
+
+  const [user, setUser] = useState(userData);
   return (
     <div className="App">
-      <Home />
+      <UserContext.Provider value={userData}>
+        <Home />
+      </UserContext.Provider>
     </div>
   );
 }

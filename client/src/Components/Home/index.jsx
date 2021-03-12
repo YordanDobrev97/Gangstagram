@@ -16,6 +16,9 @@ import Login from '../Login/index';
 import Register from "../Register/index";
 import Feeds from '../Feed/all';
 import CreatePost from '../Post/create';
+import Details from '../Feed/details';
+
+import UserContext from '../../UserContext';
 
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
@@ -26,6 +29,8 @@ class Home extends Component {
         isAuthentication: cookies.get('userId') || false,
         isClickCreatePost: false,
     };
+
+    static contextType = UserContext
 
     isLoggedUser = (isLogged) => {
         this.setState({
@@ -40,6 +45,7 @@ class Home extends Component {
     }
 
     render() {
+        console.log(this.context);
         if (this.state.isClickCreatePost) {
             return (<Redirect to='/createPost'/>)
         }
@@ -51,14 +57,22 @@ class Home extends Component {
                     <Link to="/login" />
                     <Link to="/register" />
                     <Link to="/feeds" />
+                    <Link to="/feed/:id" />
                     <Link to="/createPost" />
 
                     <AppBar display="flex" mb={4} position="static" color="transparent">
+                    
                     <Box>
                         <h1>
                             <a href='/'>Gangstagram</a>
                         </h1>
+                        {this.context.isAuth ? (
+                            <p>Hello, {this.context.username}</p>
+                        )  : (
+                            <React.Fragment></React.Fragment>
+                        )}
                     </Box>
+                    
 
                     {this.state.isAuthentication ? (
                         <Box textAlign='center'>
@@ -91,6 +105,9 @@ class Home extends Component {
                         </Route>
                         <Route path="/feeds">
                             <Feeds />
+                        </Route>
+                        <Route path="/feed/:id">
+                            <Details />
                         </Route>
                         <Route path="/createPost">
                             <CreatePost />

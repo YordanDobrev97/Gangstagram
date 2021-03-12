@@ -1,34 +1,37 @@
 import React, { Component } from "react";
 import Input from "../Input/input";
-import Cookies from "universal-cookie";
 import Feeds from "../Feed/index";
 import { Redirect } from "react-router-dom";
 import LoginService from '../../Services/login';
-import { UserProvider } from '../../UserContext';
 
 import {Box} from '@material-ui/core'
 import { Button } from '@material-ui/core';
-
-const cookies = new Cookies();
+import UserContext from '../../UserContext';
 
 class Login extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      isLogged: false,
-    };
+      isRedirect: false,
+    }
   }
+
+  static contextType = UserContext
 
   login = async () => {
     const email = this.state.email;
     const password = this.state.password;
 
-    const result = await LoginService.login(email, password);    
-    this.setState({
-      isLooged: result,
-    });
-    this.props.isLogged(result);
+    const result = await LoginService.login(email, password);
+    console.log(result)
+    if (result) {
+      this.context.username = email;
+      this.context.isAuth = true;
+      this.setState({
+        isRedirect: true,
+      })
+    }
   };
 
   getInputValue = (name, value) => {
@@ -38,9 +41,9 @@ class Login extends Component {
   };
 
   render() {
-    const isLooged = this.state.isLooged;
+    const isLogged = this.state.isRedirect;
 
-    if (isLooged) {
+    if (isLogged) {
       return (
         <React.Fragment>
           <Redirect to="/feeds" />
@@ -58,9 +61,13 @@ class Login extends Component {
           <Input type="password" name="password" className="form-control input-sm" placeholder="password" onChange={this.getInputValue.bind(this)} />
         </Box>
         <Box>
-          <Button color="primary" onClick={this.login.bind(this)}>
-            Login <i className="fa fa-sign-in"></i>
-          </Button>
+          <UserContext.Consumer>
+            {(context) => {
+              return (<Button color="primary" onClick={this.login.bind(this)}>
+              Login <i className="fa fa-sign-in"></i>
+            </Button>)
+            }}
+          </UserContext.Consumer>
         </Box>
       </form>
     );

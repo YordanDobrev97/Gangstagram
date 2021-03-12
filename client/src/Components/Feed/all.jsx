@@ -53,6 +53,7 @@ class Feed extends Component {
 
   addComment = async () => {
     const result = await CommentService.add(this.state.comment, this.state.postId);
+    console.log(result);
     if (result) {
       this.setState({
         comment: '',
@@ -68,6 +69,8 @@ class Feed extends Component {
     return (
       <Fragment>
         {this.state.posts.length == 0 ? 'No have posts' : Object.keys(this.state.posts).map((index) => {
+          const feedId = this.state.posts[index].id;
+          const imgHref = '/feed/' + feedId;
           return (
             <Grid
               container
@@ -92,10 +95,12 @@ class Feed extends Component {
                     {this.state.posts[index].title}
                   </Typography>
 
-                  <CardMedia 
-                    image={this.state.posts[index].image} 
-                    component="img" 
-                    style={{width: "50%", height: "180px", margin: "0 auto"}}/> 
+                  <Link href={imgHref}>
+                    <CardMedia 
+                      image={this.state.posts[index].image} 
+                      component="img" 
+                      style={{width: "50%", height: "180px", margin: "0 auto"}}/> 
+                  </Link>
 
                   <Typography variant="body2" color="textSecondary" component="p" 
                   style={{ borderStyle: "groove", padding: "8px", width: "50%", margin: "auto" }}>
@@ -120,21 +125,6 @@ class Feed extends Component {
                 </Button>
               </Card>
             </Grid>
-            // <div class="w-50 m-auto bg-light">
-            //   <Avatar username={username} />
-            //   <FollowBtn username={username} />
-            //   <div class="text-center">
-            //     <img
-            //       className="w-50 h-25 mx-auto d-block"
-            //       src={this.state.posts[index].image}
-            //     />
-            //   </div>
-
-            //   <div>
-            //     <LikePost postId={this.state.posts[index].id} />
-            //     <PostComment postId={this.state.posts[index].id} />
-            //   </div>
-            // </div>
           );
         })}
       </Fragment>

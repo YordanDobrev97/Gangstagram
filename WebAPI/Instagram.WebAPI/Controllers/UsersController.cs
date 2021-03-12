@@ -96,7 +96,7 @@
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim("username", user.UserName),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtKey"]));
