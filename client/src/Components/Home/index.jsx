@@ -45,7 +45,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.context);
         if (this.state.isClickCreatePost) {
             return (<Redirect to='/createPost'/>)
         }
