@@ -7,9 +7,7 @@
     {
         IEnumerable<AllPostsViewModel> All();
 
-        IEnumerable<AllPostsViewModel> GetUserPosts(string userId);
-
-        IEnumerable<AllPostsViewModel> GetByUsername(string username);
+        IEnumerable<ProfileViewModel> GetUserPosts(string userId);
 
        GetByIdViewModel GetById(string postId);
 

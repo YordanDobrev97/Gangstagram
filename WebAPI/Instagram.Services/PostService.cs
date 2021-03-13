@@ -71,20 +71,6 @@
                 return false;
             }
 
-            //byte[] imageBytes;
-
-            //using var stream = new MemoryStream();
-            //image.CopyTo(stream);
-            //imageBytes = stream.ToArray();
-
-            //var destination = new MemoryStream(imageBytes);
-            //var imageName = $"{Guid.NewGuid()}{userId}";
-            //var uploadParams = new ImageUploadParams()
-            //{
-            //    File = new FileDescription(imageName, destination),
-            //};
-            //var result = this.cloudinary.Upload(uploadParams);
-
             var newImage = new Image
             {
                 Imageurl = image,
@@ -129,26 +115,15 @@
             return posts;
         }
 
-        public IEnumerable<AllPostsViewModel> GetUserPosts(string userId)
+        public IEnumerable<ProfileViewModel> GetUserPosts(string userId)
         {
-            if (!this.db.Posts.Any(x => x.UserId == userId))
-            {
-                return new AllPostsViewModel[0];
-            }
-
-            var posts = new List<AllPostsViewModel>();
-            foreach (var item in this.db.Posts
-                .Include(x => x.User)
-                .Include(x => x.Image)
-                .Where(x => x.UserId == userId))
-            {
-                var post = new AllPostsViewModel
+            var posts = this.db.Posts
+                .Where(x => x.User.Id == userId)
+                .Select(x => new ProfileViewModel
                 {
-                    Content = item.Body,
-                    Image = item.Image.Imageurl,
-                };
-                posts.Add(post);
-            }
+                    Id = x.Id,
+                    Image = x.Image.Imageurl,
+                }).ToList();
 
             return posts;
         }
@@ -181,21 +156,6 @@
                 .Select(x => x.UserName)
                 .FirstOrDefault();
 
-        }
-
-        public IEnumerable<AllPostsViewModel> GetByUsername(string username)
-        {
-            var posts = this.db.Posts
-                .Where(x => x.User.UserName == username)
-                .Select(x => new AllPostsViewModel
-                {
-                    Id = x.Id,
-                    Content = x.Body,
-                    Image = x.Image.Imageurl,
-                    Username = x.User.UserName,
-                }).ToList();
-
-            return posts;
         }
     }
 }

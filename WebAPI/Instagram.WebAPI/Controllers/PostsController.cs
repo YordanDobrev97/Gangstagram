@@ -9,6 +9,7 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using Instagram.Services;
+    using System.Collections.Generic;
 
     [ApiController]
     [Route("/api/posts/[action]")]
@@ -59,24 +60,12 @@
         [HttpPost]
         public JsonResult GetUserPosts()
         {
-            var username = this.HttpContext.Request.Headers["X-Username"].ToString();
+            var token = this.HttpContext.Request.Headers["X-Username"].ToString();
+            var userId = this.GetUserId(token);
 
-            var viewModel = new ProfileViewModel();
-
-            if (!string.IsNullOrEmpty(username))
-            {
-                viewModel.Posts = this.postService.GetByUsername(username).ToList();
-                viewModel.Username = username;
-            }
-            else
-            {
-                var cookie = this.HttpContext.Request.Headers["X-User-Token"];
-                var userId = this.GetUserId(cookie);
-                viewModel.Posts = this.postService.GetUserPosts(userId).ToList();
-                viewModel.Username = this.postService.GetUsername(userId);
-            }
-
-            return new JsonResult(viewModel);
+            var posts = this.postService.GetUserPosts(userId).ToList();
+            
+            return new JsonResult(posts);
         }
 
         [HttpPost]

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { Box, Button, Grid } from "@material-ui/core";
 
 import ProfileImage from "./profileImage";
 import CreatePost from "../Post/create";
@@ -17,48 +18,27 @@ class Profile extends Component {
     super(props);
 
     this.state = {
-      posts: [],
+      posts: null,
       isLoading: false,
     };
   }
 
   async componentDidMount() {
-    let headers = {};
-    if (this.hasSearching()) {
-      headers = {
-        "X-Username": this.props.history.location.state.username,
-      };
-      this.setState({
-        isLoading: true,
-      });
-    } else {
-      headers = {
-        "X-User-Token": Cookies.get("userId"),
-      };
-      this.setState({
-        isLoading: true,
-      });
-    }
-
     await fetch("https://localhost:5001/api/posts/getUserPosts", {
       method: "POST",
-      headers: headers,
+      headers: {
+        "X-Username": Cookies.get("userId"),
+      },
     })
       .then((r) => {
         return r.json();
       })
       .then((data) => {
-        if (!data) {
-          this.setState({
-            isLoading: false,
-          });
-        } else {
-          this.setState({
-            username: data.username,
-            posts: data.posts,
-            isLoading: true,
-          });
-        }
+        console.log(data);
+        this.setState({
+          posts: data,
+          isLoading: true,
+        });
       })
       .catch((err) => {});
   }
@@ -72,52 +52,52 @@ class Profile extends Component {
       return <div className="loading-container">Loading...</div>;
     }
 
+    console.log(this.state.posts);
     return (
-      <div class="container">
-        {/* <Navigation /> */}
-        <div class="view-account">
-          <section class="module">
-            <Link to="/feeds">Feeds</Link>
-            <div class="module-inner">
-              <div class="side-bar">
-                <div class="user-info">
-                  <ProfileImage />
-                  <Bio username={this.state.username} />
-                </div>
-              </div>
+      <Box
+        display="flex"
+        style={{
+          background: "grey",
+          margin: "20px",
+          width: "20%",
+        }}
+      >
+        <Box>
+          <img
+            style={{ margin: "14px 50px", width: "150px", height: "110px" }}
+            src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
+          />
 
-              <div className="content-panel">
-                {this.hasSearching() ? (
-                  <Fragment></Fragment>
-                ) : (
-                  <div className="content-header-wrapper">
-                    <CreatePost />
-                  </div>
-                )}
+          <Button
+            style={{ margin: "8px", background: "#80D7EA", color: "white" }}
+          >
+            Change Image
+          </Button>
+        </Box>
 
-                <div className="drive-wrapper drive-grid-view">
-                  <div className="grid-items-wrapper">
-                    <div className="drive-item module text-center">
-                      <Posts>
-                        {Object.keys(this.state.posts).map((index) => {
-                          console.log(this.state.posts[index]);
-                          return (
-                            <img
-                              width="150"
-                              height="140"
-                              src={this.state.posts[index].image}
-                            />
-                          );
-                        })}
-                      </Posts>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
+        <Box>
+          <Box display="flex">
+            {this.state.posts.map((post) => {
+              const link = `/delete/${post.id}`;
+              return (
+                <Box key={post.id} style={{ height: "150px" }}>
+                  <img
+                    style={{ margin: "18px", width: "200px", height: "150px" }}
+                    src={post.image}
+                  />
+                  <Button
+                    href={link}
+                    style={{ margin: "8px", background: "white" }}
+                    color="secondary"
+                  >
+                    Delete
+                  </Button>
+                </Box>
+              );
+            })}
+          </Box>
+        </Box>
+      </Box>
     );
   }
 }
