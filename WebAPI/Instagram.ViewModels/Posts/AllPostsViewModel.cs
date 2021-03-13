@@ -13,5 +13,7 @@
         public string Content { get; set; }
 
         public string Image { get; set; }
+
+        public string ProfileUserImage { get; set; }
     }
 }

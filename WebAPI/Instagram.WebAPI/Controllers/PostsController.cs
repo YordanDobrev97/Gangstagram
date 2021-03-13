@@ -29,9 +29,6 @@
         [HttpGet]
         public JsonResult All()
         {
-            //var cookie = this.HttpContext.Request.Headers["X-User-Token"];
-            //var userId = this.GetUserId(cookie);
-
             var posts = this.postService.All();
             return new JsonResult(posts);
         }

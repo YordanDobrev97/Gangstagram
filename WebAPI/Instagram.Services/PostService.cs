@@ -109,6 +109,7 @@
                     Title = item.Title,
                     Content = item.Body,
                     Image = item.Image.Imageurl,
+                    ProfileUserImage = item.User.Image,
                 };
                 posts.Add(post);
             }
