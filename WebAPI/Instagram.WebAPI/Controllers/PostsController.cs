@@ -57,7 +57,7 @@
             return BadRequest("Not successfully created on post");
         }
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult GetUserPosts()
         {
             var token = this.HttpContext.Request.Headers["X-Username"].ToString();
@@ -104,6 +104,13 @@
         public JsonResult GetById([FromBody] PostLikeViewModel viewModel)
         {
             var data = this.postService.GetById(viewModel.PostId);
+            return new JsonResult(data);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteById([FromBody] PostLikeViewModel viewModel)
+        {
+            var data = this.postService.DeleteById(viewModel.PostId);
             return new JsonResult(data);
         }
 

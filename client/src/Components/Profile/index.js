@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Grid } from "@material-ui/core";
+import ProfileService from "../../Services/profile";
 
 import ProfileImage from "./profileImage";
 import CreatePost from "../Post/create";
@@ -24,23 +25,26 @@ class Profile extends Component {
   }
 
   async componentDidMount() {
-    await fetch("https://localhost:5001/api/posts/getUserPosts", {
-      method: "POST",
-      headers: {
-        "X-Username": Cookies.get("userId"),
-      },
-    })
-      .then((r) => {
-        return r.json();
-      })
-      .then((data) => {
-        console.log(data);
-        this.setState({
-          posts: data,
-          isLoading: true,
-        });
-      })
-      .catch((err) => {});
+    const userId = Cookies.get("userId");
+    const data = await ProfileService.getUserPosts(userId).then((r) =>
+      r.json()
+    );
+
+    this.setState({
+      posts: data,
+      isLoading: true,
+    });
+  }
+
+  async remove(id) {
+    const result = await ProfileService.removeById(id).then((r) => r.json());
+
+    console.log(result);
+    if (result) {
+      this.setState((prevState) => ({
+        posts: prevState.posts.filter((el) => el.id != id),
+      }));
+    }
   }
 
   hasSearching() {
@@ -78,7 +82,7 @@ class Profile extends Component {
         <Box>
           <Box display="flex">
             {this.state.posts.map((post) => {
-              const link = `/delete/${post.id}`;
+              const link = `/delete:id${post.id}`;
               return (
                 <Box key={post.id} style={{ height: "150px" }}>
                   <img
@@ -86,7 +90,7 @@ class Profile extends Component {
                     src={post.image}
                   />
                   <Button
-                    href={link}
+                    onClick={this.remove.bind(this, post.id)}
                     style={{ margin: "8px", background: "white" }}
                     color="secondary"
                   >

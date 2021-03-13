@@ -9,7 +9,9 @@
 
         IEnumerable<ProfileViewModel> GetUserPosts(string userId);
 
-       GetByIdViewModel GetById(string postId);
+        GetByIdViewModel GetById(string postId);
+
+        bool DeleteById(string postId);
 
         bool Create(string userId, string title, string content, string image);
 

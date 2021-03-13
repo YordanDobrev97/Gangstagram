@@ -57,13 +57,12 @@ class Home extends Component {
             </Route>
             <Route path="/">
               <h1>
-                Welcome to Gangstagram, custom version of{" "}
+                Welcome to Gangstagram, custom version of
                 <span className="instagram">Instagram</span>
               </h1>
               <h2>Build with React.js and ASP.NET Core (Web API)</h2>
               <p className="message">
-                Log in to your account, if you do not have an account you can
-                create one
+                Log in to your account, if you do not have an account register
               </p>
               <img
                 width="420"

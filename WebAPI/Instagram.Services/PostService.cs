@@ -97,6 +97,7 @@
             var posts = new List<AllPostsViewModel>();
 
             foreach (var item in this.db.Posts
+                .Where(x => !x.IsDeleted)
                 .Include(x => x.Image)
                 .Include(x => x.User))
             {
@@ -119,6 +120,7 @@
         {
             var posts = this.db.Posts
                 .Where(x => x.User.Id == userId)
+                .Where(x => !x.IsDeleted)
                 .Select(x => new ProfileViewModel
                 {
                     Id = x.Id,
@@ -148,6 +150,20 @@
                 Image = image,
                 GetByIdPosts = comments,
             };
+        }
+
+        public bool DeleteById(string postId)
+        {
+            var post = this.db.Posts.FirstOrDefault(x => x.Id == postId);
+
+            if (post == null)
+            {
+                return false;
+            }
+            
+            post.IsDeleted = true;
+            this.db.SaveChanges();
+            return true;
         }
 
         public string GetUsername(string userId)
