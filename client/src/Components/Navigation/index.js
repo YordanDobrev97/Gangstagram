@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import { AppBar, Box, Button } from "@material-ui/core";
 import UserContext from "../../UserContext";
@@ -50,7 +50,9 @@ class Navigation extends Component {
         <AppBar display="flex" mb={4} position="static" color="transparent">
           <Box>
             <h1>
-              <a href={this.context[0].isAuth ? "/feeds" : "/"}>Gangstagram</a>
+              <Link to={this.context[0].isAuth ? "/feeds" : "/"}>
+                Gangstagram
+              </Link>
             </h1>
             {this.context[0].isAuth ? (
               <p>Hello, {this.context[0].username}</p>
@@ -62,13 +64,14 @@ class Navigation extends Component {
           {this.context[0].isAuth ? (
             <Box textAlign="center">
               <Button
-                href="/myProfile"
                 style={{ Width: "50px", float: "left", marginBottom: "10px" }}
                 variant="contained"
                 color="primary"
                 component="button"
               >
-                My Profile
+                <Link to="/myProfile" style={{ color: "white" }}>
+                  My Profile
+                </Link>
               </Button>
 
               <Button
@@ -98,9 +101,9 @@ class Navigation extends Component {
                   fullWidth={false}
                   size="medium"
                   color="primary"
-                  href="/register"
+                  to="/login"
                 >
-                  Register
+                  <Link to="/login">Login</Link>
                 </Button>
               </Box>
               <Box>
@@ -108,9 +111,9 @@ class Navigation extends Component {
                   fullWidth={false}
                   size="medium"
                   color="primary"
-                  href="/login"
+                  to="/register"
                 >
-                  Login
+                  <Link to="/register">Register</Link>
                 </Button>
               </Box>
             </Fragment>

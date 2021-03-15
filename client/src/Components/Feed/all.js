@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
+
 import {
   Button,
   Avatar,
@@ -8,7 +10,6 @@ import {
   CardContent,
   Typography,
   Box,
-  Link,
   Icon,
 } from "@material-ui/core";
 
@@ -107,7 +108,7 @@ class Feed extends Component {
                         {this.state.posts[index].title}
                       </Typography>
 
-                      <Link href={imgHref}>
+                      <Link to={imgHref}>
                         <CardMedia
                           image={this.state.posts[index].image}
                           component="img"

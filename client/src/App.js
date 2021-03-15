@@ -1,6 +1,14 @@
 import React, { useState } from "react";
+import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
 import Home from "./Components/Home/index";
+import Navigation from "./Components/Navigation/index";
+import Login from "./Components/Login/index";
+import Register from "./Components/Register/index";
+import Feeds from "./Components/Feed/all";
+import CreatePost from "./Components/Post/create";
+import Details from "./Components/Feed/details";
+import Profile from "./Components/Profile/index";
 import UserContext from "./UserContext";
 
 import "./App.css";
@@ -28,7 +36,22 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={[userData, setUser]}>
-        <Home />
+        <Navigation />
+
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/feeds" component={Feeds} />
+          <Route path="/myProfile" component={Profile} />
+          <Route
+            path="/feed/:id"
+            component={(props) => {
+              return <Details id={props.match.params.id} />;
+            }}
+          ></Route>
+          <Route path="/createPost" component={CreatePost} />
+          <Route path="/" component={Home} />
+        </Switch>
       </UserContext.Provider>
     </div>
   );
