@@ -5,7 +5,7 @@ import { Box, Button } from "@material-ui/core";
 import ProfileService from "../../Services/profile";
 
 import Image from "../Image/Index";
-import Bio from "./profileBio";
+import ProfileStatus from "./ProfileStatus";
 
 import Cookies from "js-cookie";
 
@@ -23,7 +23,6 @@ class Profile extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.state.isPersonalProfile);
     const data = await ProfileService.getUserPosts(
       this.state.userId,
       this.state.isReadToken
@@ -76,11 +75,13 @@ class Profile extends Component {
               Change Image
             </Button>
           ) : (
-            <Fragment></Fragment>
+            <Fragment>
+              <ProfileStatus />
+            </Fragment>
           )}
         </Box>
 
-        <Box>
+        <Box style={{ marginTop: "30px", background: "#312f2f", width: "80%" }}>
           <Box display="flex">
             {this.state.posts.map((post) => {
               const link = `/delete:id${post.id}`;

@@ -1,16 +1,20 @@
-import React, { Component } from "react";
-import StatusPosts from "./statusPosts";
-import StatusFollowers from "./statusFollowers";
-import StatusFollowing from "./statusFollowing";
+import React, { Component, Fragment } from "react";
+import { Button } from "@material-ui/core";
+
+import Bio from "./Bio";
+import Follow from "./Follow";
+import Followers from "./Followers";
+import Following from "./Following";
 
 class ProfileStatus extends Component {
   render() {
     return (
-      <ul className="list-group m-md-3">
-        <StatusPosts />
-        <StatusFollowers />
-        <StatusFollowing />
-      </ul>
+      <Fragment>
+        <Bio />
+        <Follow />
+        <Followers />
+        <Following />
+      </Fragment>
     );
   }
 }
