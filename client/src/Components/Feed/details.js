@@ -1,7 +1,7 @@
 import { Box, Link } from "@material-ui/core";
 import React, { Fragment, useState, useEffect } from "react";
 import PostService from "../../Services/post";
-import Image from "./Image";
+import Image from "../Image/Index";
 
 export default function Details(props) {
   const [postData, setPostData] = useState([]);

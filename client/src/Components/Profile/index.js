@@ -1,16 +1,11 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
-import { Box, Button, Grid } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
+
+import { Box, Button } from "@material-ui/core";
 import ProfileService from "../../Services/profile";
 
-import ProfileImage from "./profileImage";
-import CreatePost from "../Post/create";
-
+import Image from "../Image/Index";
 import Bio from "./profileBio";
-import Posts from "../Post/all";
-import Navigation from "../Navigation/index";
-
-import "./style.css";
 
 import Cookies from "js-cookie";
 
@@ -19,16 +14,20 @@ class Profile extends Component {
     super(props);
 
     this.state = {
+      userId: this.props.userId,
+      isReadToken: this.props.isReadToken,
       posts: null,
       isLoading: false,
+      isPersonalProfile: this.props.location.pathname.startsWith("/myProfile"),
     };
   }
 
   async componentDidMount() {
-    const userId = Cookies.get("userId");
-    const data = await ProfileService.getUserPosts(userId).then((r) =>
-      r.json()
-    );
+    console.log(this.state.isPersonalProfile);
+    const data = await ProfileService.getUserPosts(
+      this.state.userId,
+      this.state.isReadToken
+    ).then((r) => r.json());
 
     this.setState({
       posts: data,
@@ -56,27 +55,29 @@ class Profile extends Component {
       return <div className="loading-container">Loading...</div>;
     }
 
-    console.log(this.state.posts);
     return (
-      <Box
-        display="flex"
-        style={{
-          background: "grey",
-          margin: "20px",
-          width: "20%",
-        }}
-      >
+      <Box display="flex">
         <Box>
-          <img
-            style={{ margin: "14px 50px", width: "150px", height: "110px" }}
-            src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
+          <Image
+            image={
+              "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
+            }
+            styles={{ width: "150px", margin: "30px" }}
           />
-
-          <Button
-            style={{ margin: "8px", background: "#80D7EA", color: "white" }}
-          >
-            Change Image
-          </Button>
+          {this.state.isPersonalProfile ? (
+            <Button
+              style={{
+                background: "#80D7EA",
+                color: "white",
+                display: "block",
+                marginLeft: "30px",
+              }}
+            >
+              Change Image
+            </Button>
+          ) : (
+            <Fragment></Fragment>
+          )}
         </Box>
 
         <Box>
@@ -84,18 +85,31 @@ class Profile extends Component {
             {this.state.posts.map((post) => {
               const link = `/delete:id${post.id}`;
               return (
-                <Box key={post.id} style={{ height: "150px" }}>
-                  <img
-                    style={{ margin: "18px", width: "200px", height: "150px" }}
-                    src={post.image}
+                <Box key={post.id} style={{ height: "50px" }}>
+                  <Image
+                    image={post.image}
+                    styles={{
+                      width: "200px",
+                      height: "180px",
+                      marginTop: "20px",
+                      marginLeft: "40px",
+                    }}
                   />
-                  <Button
-                    onClick={this.remove.bind(this, post.id)}
-                    style={{ margin: "8px", background: "white" }}
-                    color="secondary"
-                  >
-                    Delete
-                  </Button>
+                  {this.state.isPersonalProfile ? (
+                    <Button
+                      onClick={this.remove.bind(this, post.id)}
+                      style={{
+                        display: "block",
+                        margin: "8px auto",
+                        background: "white",
+                      }}
+                      color="secondary"
+                    >
+                      Delete
+                    </Button>
+                  ) : (
+                    <Fragment></Fragment>
+                  )}
                 </Box>
               );
             })}
@@ -106,4 +120,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withRouter(Profile);

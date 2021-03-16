@@ -10,7 +10,7 @@ function UserAvatar(props) {
         alt="user avatar"
         src={props.profileUserImage}
       />
-      <Link href={props.userId} style={{ float: "left" }}>
+      <Link to={"/profile/" + props.userId} style={{ float: "left" }}>
         {props.username}
       </Link>
     </Box>

@@ -1,9 +1,10 @@
 export default class ProfileService {
-  static getUserPosts = (userId) => {
+  static getUserPosts = (userId, isReadToken) => {
     return fetch("https://localhost:5001/api/posts/getUserPosts", {
       method: "GET",
       headers: {
-        "X-Username": userId,
+        "X-User-Token": userId,
+        "X-Is-Read-Token": isReadToken,
       },
     });
   };

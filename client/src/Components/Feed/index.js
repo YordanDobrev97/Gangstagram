@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Grid, Card, CardContent, Typography } from "@material-ui/core";
 
 import UserAvatar from "./avatar";
-import Image from "./Image";
+import Image from "../Image/Index";
 import FooterFeed from "./FooterFeed";
 import CommentSection from "./comment";
 
@@ -72,8 +72,8 @@ class Feed extends Component {
                         <Image
                           image={this.state.posts[index].image}
                           styles={{
-                            width: "50%",
-                            height: "180px",
+                            width: "55%",
+                            height: "15%",
                             margin: "0 auto",
                           }}
                         />

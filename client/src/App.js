@@ -42,11 +42,27 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/feeds" component={Feeds} />
-          <Route path="/myProfile" component={Profile} />
+          <Route
+            path="/myProfile"
+            component={() => {
+              return <Profile userId={token} isReadToken={true} />;
+            }}
+          />
           <Route
             path="/feed/:id"
             component={(props) => {
               return <Details id={props.match.params.id} />;
+            }}
+          ></Route>
+          <Route
+            path="/profile/:userId"
+            component={(props) => {
+              return (
+                <Profile
+                  userId={props.match.params.userId}
+                  isReadToken={false}
+                />
+              );
             }}
           ></Route>
           <Route path="/createPost" component={CreatePost} />

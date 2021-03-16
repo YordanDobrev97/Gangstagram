@@ -57,10 +57,15 @@
         [HttpGet]
         public JsonResult GetUserPosts()
         {
-            var token = this.HttpContext.Request.Headers["X-Username"].ToString();
-            var userId = this.GetUserId(token);
+            var token = this.HttpContext.Request.Headers["X-User-Token"].ToString();
+            var isReadToken = bool.Parse(this.HttpContext.Request.Headers["X-Is-Read-Token"].ToString());
 
-            var posts = this.postService.GetUserPosts(userId).ToList();
+            if (isReadToken)
+            {
+                token = this.GetUserId(token);
+            }
+
+            var posts = this.postService.GetUserPosts(token).ToList();
             
             return new JsonResult(posts);
         }

@@ -11,6 +11,7 @@ ReactDOM.render(
     <Link to="/register" />
     <Link to="/feeds" />
     <Link to="/feed/:id" />
+    <Link to="/profile/:id" />
     <Link to="/createPost" />
     <Link to="/myProfile" />
     <Route path="/" component={App} />
