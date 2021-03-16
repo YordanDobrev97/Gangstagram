@@ -5,7 +5,7 @@
 
     public interface IPostService
     {
-        IEnumerable<AllPostsViewModel> All();
+        IEnumerable<AllPostsViewModel> All(string userId);
 
         IEnumerable<ProfileViewModel> GetUserPosts(string userId);
 

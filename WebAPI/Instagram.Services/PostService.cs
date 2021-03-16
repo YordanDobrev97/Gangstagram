@@ -24,6 +24,35 @@
             this.cloudinary = cloudinary;
         }
 
+        public IEnumerable<AllPostsViewModel> All(string userId)
+        {
+            var posts = new List<AllPostsViewModel>();
+
+            foreach (var item in this.db.Posts
+                .Where(x => !x.IsDeleted && x.UserId != userId)
+                .Include(x => x.Image)
+                .Include(x => x.User))
+            {
+                var postLikes = this.db.PostLikes
+                    .Count(x => x.PostId == item.Id);
+
+                var post = new AllPostsViewModel
+                {
+                    Id = item.Id,
+                    Username = item.User.UserName,
+                    UserId = item.User.Id,
+                    Title = item.Title,
+                    Content = item.Body,
+                    Image = item.Image.Imageurl,
+                    ProfileUserImage = item.User.Image,
+                    Likes = postLikes,
+                };
+                posts.Add(post);
+            }
+
+            return posts;
+        }
+
         public bool AddComment(string postId, string text, string userId)
         {
             if (!this.db.Posts.Any(x => x.Id == postId) || 
@@ -90,35 +119,6 @@
 
             db.SaveChanges();
             return true;
-        }
-
-        public IEnumerable<AllPostsViewModel> All()
-        {
-            var posts = new List<AllPostsViewModel>();
-
-            foreach (var item in this.db.Posts
-                .Where(x => !x.IsDeleted)
-                .Include(x => x.Image)
-                .Include(x => x.User))
-            {
-                var postLikes = this.db.PostLikes
-                    .Count(x => x.PostId == item.Id);
-
-                var post = new AllPostsViewModel
-                {
-                    Id = item.Id,
-                    Username = item.User.UserName,
-                    UserId = item.User.Id,
-                    Title = item.Title,
-                    Content = item.Body,
-                    Image = item.Image.Imageurl,
-                    ProfileUserImage = item.User.Image,
-                    Likes = postLikes,
-                };
-                posts.Add(post);
-            }
-
-            return posts;
         }
 
         public IEnumerable<ProfileViewModel> GetUserPosts(string userId)

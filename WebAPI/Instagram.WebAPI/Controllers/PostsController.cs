@@ -29,7 +29,10 @@
         [HttpGet]
         public JsonResult All()
         {
-            var posts = this.postService.All();
+            var token = this.HttpContext.Request.Headers["X-User-Token"].ToString();
+            var userId = this.GetUserId(token);
+
+            var posts = this.postService.All(userId);
             return new JsonResult(posts);
         }
 
