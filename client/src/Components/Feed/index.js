@@ -23,6 +23,7 @@ class Feed extends Component {
   async componentWillMount() {
     const data = await FeedService.getAll().then((r) => r.json());
 
+    console.log(data);
     this.setState({
       posts: data,
       isLoading: true,
@@ -80,7 +81,8 @@ class Feed extends Component {
 
                       <FooterFeed
                         content={this.state.posts[index].content}
-                        postId={this.state.posts[index].id}
+                        postId={feedId}
+                        likes={this.state.posts[index].likes}
                       />
                     </CardContent>
 

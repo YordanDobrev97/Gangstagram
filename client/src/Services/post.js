@@ -47,4 +47,15 @@ export default class PostService {
 
     return result;
   };
+
+  static like = async (data) => {
+    return fetch("https://localhost:5001/api/posts/likePost", {
+      method: "POST",
+      headers: {
+        "X-User-Token": cookies.get("userId"),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  };
 }

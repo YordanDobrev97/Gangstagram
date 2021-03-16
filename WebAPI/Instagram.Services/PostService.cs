@@ -101,6 +101,9 @@
                 .Include(x => x.Image)
                 .Include(x => x.User))
             {
+                var postLikes = this.db.PostLikes
+                    .Count(x => x.PostId == item.Id);
+
                 var post = new AllPostsViewModel
                 {
                     Id = item.Id,
@@ -110,6 +113,7 @@
                     Content = item.Body,
                     Image = item.Image.Imageurl,
                     ProfileUserImage = item.User.Image,
+                    Likes = postLikes,
                 };
                 posts.Add(post);
             }

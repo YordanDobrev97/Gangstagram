@@ -91,10 +91,10 @@
 
             if (!result)
             {
-                return new JsonResult("This post not liked successfully");
+                return new JsonResult(false);
             }
 
-            return new JsonResult("This post Liked successfully");
+            return new JsonResult(true);
         }
 
         [HttpPost]

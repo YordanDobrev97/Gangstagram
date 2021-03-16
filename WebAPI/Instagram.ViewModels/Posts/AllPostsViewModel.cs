@@ -15,5 +15,7 @@
         public string Image { get; set; }
 
         public string ProfileUserImage { get; set; }
+
+        public int Likes { get; set; }
     }
 }

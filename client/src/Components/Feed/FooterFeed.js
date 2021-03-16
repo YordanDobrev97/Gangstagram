@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Typography } from "@material-ui/core";
 
-import Like from "./likePost";
+import Like from "./Like";
 
 function FooterFeed(props) {
   return (
@@ -20,7 +20,7 @@ function FooterFeed(props) {
         {props.content}
       </Typography>
 
-      <Like />
+      <Like likes={props.likes} postId={props.postId} />
     </Fragment>
   );
 }
