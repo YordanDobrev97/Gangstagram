@@ -1,6 +1,7 @@
 import { Box, Link } from "@material-ui/core";
 import React, { Fragment, useState, useEffect } from "react";
 import PostService from "../../Services/post";
+import Image from "./Image";
 
 export default function Details(props) {
   const [postData, setPostData] = useState([]);
@@ -24,11 +25,11 @@ export default function Details(props) {
   return (
     <Fragment>
       <Box component="div">
-        <img
-          width="320px"
-          height="100px"
-          src={postData.image}
-          style={{
+        <Image
+          image={postData.image}
+          styles={{
+            width: "320px",
+            height: "100px",
             position: "absolute",
             top: "140px",
             left: "631px",

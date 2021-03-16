@@ -1,17 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Avatar, Box } from "@material-ui/core";
 
-function Avatar(props) {
+function UserAvatar(props) {
   return (
-    <header className="w-25 ml-md-2">
-      <img
-        src="https://icons-for-free.com/iconfiles/png/512/avatar+human+people+profile+user+icon-1320168139431219590.png"
-        className="w-25 img-fluid mt-md-2"
+    <Box component="span">
+      <Avatar
+        style={{ float: "left" }}
+        alt="user avatar"
+        src={props.profileUserImage}
       />
-      <div>
-        <span class="text-dark mr-lg-5">{props.username}</span>
-      </div>
-    </header>
+      <Link href={props.userId} style={{ float: "left" }}>
+        {props.username}
+      </Link>
+    </Box>
   );
 }
 
-export default Avatar;
+export default UserAvatar;

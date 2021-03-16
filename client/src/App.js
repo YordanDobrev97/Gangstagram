@@ -5,7 +5,7 @@ import Home from "./Components/Home/index";
 import Navigation from "./Components/Navigation/index";
 import Login from "./Components/Login/index";
 import Register from "./Components/Register/index";
-import Feeds from "./Components/Feed/all";
+import Feeds from "./Components/Feed/Index";
 import CreatePost from "./Components/Post/create";
 import Details from "./Components/Feed/details";
 import Profile from "./Components/Profile/index";

@@ -1,36 +1,28 @@
 import React, { Component, Fragment } from "react";
-import Cookies from "js-cookie";
+import { Button, Icon } from "@material-ui/core";
 
-import Input from "../Input/input";
+import CommentService from "../../Services/comment";
 
-class Comment extends Component {
+class CommentSection extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      postId: this.props.postId,
+      postId: "",
       comment: "Empty",
     };
   }
 
-  addComment = () => {
-    const data = {
-      postId: this.state.postId,
-      comment: this.state.comment,
-    };
-
-    fetch("https://localhost:5001/api/posts/addComment", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "X-User-Token": Cookies.get("userId"),
-        "Content-Type": "application/json",
-      },
-    })
-      .then((r) => r.json())
-      .then((result) => {
-        console.log(result);
+  addComment = async () => {
+    const result = await CommentService.add(
+      this.state.comment,
+      this.state.postId
+    );
+    if (result) {
+      this.setState({
+        comment: "",
       });
+    }
   };
 
   getInputValue = (name, value) => {
@@ -42,29 +34,29 @@ class Comment extends Component {
   render() {
     return (
       <Fragment>
-        <div class="bg-light p-2">
-          <div class="d-flex flex-row align-items-start bg-dark">
-            <Input
-              type="text"
-              name="comment"
-              placeholder="Add your comment"
-              onChange={this.getInputValue.bind(this)}
-            />
-          </div>
-          <div class="mt-2 text-right">
-            <input hidden="true" value={this.props.postId} />
-            <button
-              class="btn btn-primary btn-sm shadow-none"
-              onClick={this.addComment}
-              type="button"
-            >
-              Post comment
-            </button>
-          </div>
-        </div>
+        <input
+          type="text"
+          placeholder="Add comment"
+          onChange={(e) => {
+            this.setState({
+              comment: e.target.value,
+              postId: this.props.postId,
+            });
+          }}
+        />
+        <Button
+          size="small"
+          variant="contained"
+          color="primary"
+          endIcon={<Icon>send</Icon>}
+          style={{ marginLeft: "10px", marginBottom: "5px" }}
+          onClick={this.addComment.bind(this)}
+        >
+          Send
+        </Button>
       </Fragment>
     );
   }
 }
 
-export default Comment;
+export default CommentSection;

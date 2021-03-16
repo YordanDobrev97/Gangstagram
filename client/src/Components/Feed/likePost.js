@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
+
+import { Button } from "@material-ui/core";
+
 import Cookies from "js-cookie";
 
-class LikePost extends Component {
+class Like extends Component {
   constructor(props) {
     super(props);
 
@@ -12,21 +16,21 @@ class LikePost extends Component {
     };
   }
 
-  likePost = () => {
+  like = () => {
     const data = {
       postId: this.state.postId,
     };
 
-    fetch("https://localhost:5001/api/posts/likePost", {
-      method: "POST",
-      headers: {
-        "X-User-Token": Cookies.get("userId"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((r) => r.json())
-      .then((result) => {});
+    // fetch("https://localhost:5001/api/posts/likePost", {
+    //   method: "POST",
+    //   headers: {
+    //     "X-User-Token": Cookies.get("userId"),
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((r) => r.json())
+    //   .then((result) => {});
   };
 
   showLikeUsers = () => {
@@ -63,43 +67,22 @@ class LikePost extends Component {
   render() {
     return (
       <Fragment>
-        <button className="w-50 h-25 mx-auto d-block" onClick={this.likePost}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            fill="currentColor"
-            className="bi bi-heart"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
-            />
-          </svg>
-        </button>
-        <div className="text-center">
-          <button className="w3-button w3-black" onClick={this.showLikeUsers}>
-            Show likes
-          </button>
-        </div>
-
-        <div
-          style={{ display: this.state.modal ? "block" : "none" }}
-          className="border border-primary"
+        <Button
+          variant="outlined"
+          size="medium"
+          color="secondary"
+          style={{ margin: "4px" }}
+          onClick={this.like}
         >
-          <div className="container bg-light text-center">
-            {this.state.users.length == 0
-              ? "No have likes"
-              : this.state.users.map((userObj) => {
-                  console.log(userObj);
-                  return <div>{userObj.username}</div>;
-                })}
-          </div>
-        </div>
+          <img src="https://img.icons8.com/office/16/000000/filled-like--v2.png" />
+        </Button>
+
+        <span>
+          <Link to="/likes">345</Link> likes
+        </span>
       </Fragment>
     );
   }
 }
 
-export default LikePost;
+export default Like;

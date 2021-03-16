@@ -1,16 +1,7 @@
 import React, { Component } from "react";
-import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
-
 import { Container } from "@material-ui/core";
 
-import UserContext from "../../UserContext";
-
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
-
 class Home extends Component {
-  static contextType = UserContext;
-
   render() {
     return (
       <Container maxWidth="lg">
