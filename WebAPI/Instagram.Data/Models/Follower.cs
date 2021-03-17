@@ -1,11 +1,19 @@
-﻿namespace Instagram.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Instagram.Models
 {
     public class Follower
     {
         public int Id { get; set; }
 
-        public string UserId { get; set; }
+        [Required]
+        public string SenderId { get; set; }
 
-        public User User { get; set; }
+        public User Sender { get; set; }
+
+        [Required]
+        public string ReceiverId { get; set; }
+
+        public User Receiver { get; set; }
     }
 }

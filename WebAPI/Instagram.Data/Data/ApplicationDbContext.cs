@@ -20,5 +20,14 @@
         public DbSet<Image> Images { get; set; }
 
         public DbSet<Follower> Followers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Follower>()
+                .HasOne(e => e.Sender)
+                .WithMany(e => e.Followers);
+        }
     }
 }

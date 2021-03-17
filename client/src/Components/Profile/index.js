@@ -7,8 +7,6 @@ import ProfileService from "../../Services/profile";
 import Image from "../Image/Index";
 import ProfileStatus from "./ProfileStatus";
 
-import Cookies from "js-cookie";
-
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +35,6 @@ class Profile extends Component {
   async remove(id) {
     const result = await ProfileService.removeById(id).then((r) => r.json());
 
-    console.log(result);
     if (result) {
       this.setState((prevState) => ({
         posts: prevState.posts.filter((el) => el.id != id),

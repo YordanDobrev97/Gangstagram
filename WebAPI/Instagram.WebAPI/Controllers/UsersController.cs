@@ -17,7 +17,7 @@
 
     [ApiController]
     [Route("/api/Users/[action]")]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseController
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
@@ -82,6 +82,26 @@
 
             var token = GenerateJwtToken(loginInput.Email, user);
             return new JsonResult(token);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Follow([FromBody] string followerId)
+        {
+            var token = this.HttpContext.Request.Headers["X-User-Token"].ToString();
+            var userId = this.GetUserId(token);
+
+            var result = await this.usersService.AddFollowAsync(followerId, userId);
+            return new JsonResult(result);
+        }
+
+        [HttpPost]
+        public JsonResult IsFollow([FromBody] string followerId)
+        {
+            var token = this.HttpContext.Request.Headers["X-User-Token"].ToString();
+            var userId = this.GetUserId(token);
+
+            var result = this.usersService.IsFollow(followerId, userId);
+            return new JsonResult(result);
         }
 
         [HttpPost]

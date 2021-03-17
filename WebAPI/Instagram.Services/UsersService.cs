@@ -4,6 +4,7 @@
     using Instagram.WebAPI.Data;
     using Instagram.Models;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class UsersService : IUsersService
     {
@@ -18,6 +19,35 @@
         {
             this.db.Users.Add(user);
             this.db.SaveChanges();
+        }
+
+        public async Task<bool> AddFollowAsync(string followerId, string userId)
+        {
+            if (!this.db.Users.Any(x => x.Id == followerId) 
+                || !this.db.Users.Any(x => x.Id == userId))
+            {
+                return false;
+            }
+
+            if (IsFollow(followerId, userId))
+            {
+                return false;
+            }
+
+            await this.db.Followers.AddAsync(new Follower
+            {
+                SenderId = followerId,
+                ReceiverId = userId,
+            });
+
+            await this.db.SaveChangesAsync();
+            return true;
+        }
+
+        public bool IsFollow(string followerId, string userId)
+        {
+            return this.db.Followers.Any(x => x.SenderId == followerId)
+                && this.db.Followers.Any(x => x.ReceiverId == userId);
         }
 
         public UserViewModel Search(string username)

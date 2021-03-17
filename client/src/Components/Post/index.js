@@ -1,14 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import Profile from "../Profile/index";
 import LikeButton from "./likeButton";
 
 function Post(props) {
   return (
     <div>
-      {/* <Profile username={props.username} profileImg={props.profileImg} /> */}
-
       <main>
         {props.postData.map((data) => {
           return (

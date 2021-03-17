@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Cookies from "js-cookie";
 
 import Post from "./index";
 import Create from "./create";
