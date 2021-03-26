@@ -10,7 +10,7 @@ function Details(props) {
         <div className={styles["followers-container"]}>
           {props.users.map((obj) => {
             return (
-              <div className={styles["follower"]}>
+              <div key={obj.id} className={styles["follower"]}>
                 <Image
                   image={obj.image}
                   styles={{

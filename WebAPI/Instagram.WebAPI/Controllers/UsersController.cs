@@ -103,6 +103,15 @@
             return result;
         }
 
+        [HttpGet]
+        public IEnumerable<UserViewModel> GetFollowing()
+        {
+            var userId = this.HttpContext.Request.Headers["X-User-Token"].ToString();
+
+            var result = usersService.GetFollowing(userId);
+            return result;
+        }
+
         [HttpPost]
         public JsonResult IsFollow([FromBody] string followerId)
         {

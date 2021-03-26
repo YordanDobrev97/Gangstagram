@@ -45,4 +45,18 @@ export default class UserService {
       requestOptions
     );
   };
+
+  static getFollowing = (userId) => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "X-User-Token": userId,
+      },
+    };
+
+    return fetch(
+      "https://localhost:5001/api/users/getFollowing",
+      requestOptions
+    );
+  };
 }

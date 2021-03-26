@@ -76,5 +76,19 @@
 
             return followers;
         }
+
+        public IEnumerable<UserViewModel> GetFollowing(string userId)
+        {
+            var followers = this.db.Followers
+                .Where(x => x.ReceiverId == userId)
+                .Select(x => new UserViewModel
+                {
+                    Id = x.SenderId,
+                    Username = x.Sender.UserName,
+                    Image = x.Sender.Image,
+                }).ToList();
+
+            return followers;
+        }
     }
 }
