@@ -3,7 +3,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import PostService from "../../Services/post";
 import Image from "../Image/Index";
 
-export default function Details(props) {
+function Details(props) {
   const [postData, setPostData] = useState([]);
   const [isGetData, setData] = useState(false);
 
@@ -69,3 +69,5 @@ export default function Details(props) {
     </Fragment>
   );
 }
+
+export default Details;

@@ -5,11 +5,7 @@ import { Avatar, Box } from "@material-ui/core";
 function UserAvatar(props) {
   return (
     <Box component="span">
-      <Avatar
-        style={{ float: "left" }}
-        alt="user avatar"
-        src={props.profileUserImage}
-      />
+      <Avatar style={{ float: "left" }} alt="user avatar" src={props.profileUserImage} />
       <Link to={"/profile/" + props.userId} style={{ float: "left" }}>
         {props.username}
       </Link>
