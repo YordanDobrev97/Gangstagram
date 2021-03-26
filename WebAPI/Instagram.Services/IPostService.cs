@@ -1,6 +1,7 @@
 ﻿namespace Instagram.Services
 {
     using Instagram.ViewModels.Posts;
+    using Instagram.ViewModels.Users;
     using System.Collections.Generic;
 
     public interface IPostService

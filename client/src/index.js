@@ -6,7 +6,6 @@ import App from "./App";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Link to="/" />
     <Link to="/login" />
     <Link to="/register" />
     <Link to="/feeds" />

@@ -10,6 +10,7 @@
     using System.Linq;
     using Instagram.Services;
     using System.Collections.Generic;
+    using Instagram.ViewModels.Users;
 
     [ApiController]
     [Route("/api/posts/[action]")]
@@ -90,7 +91,7 @@
         }
 
         [HttpPost]
-        public JsonResult LikePost([FromBody] PostLikeViewModel viewModel)
+        public JsonResult LikePost([FromBody] PostViewModel viewModel)
         {
             var cookie = this.HttpContext.Request.Headers["X-User-Token"];
             var userId = this.GetUserId(cookie);
@@ -106,14 +107,14 @@
         }
 
         [HttpPost]
-        public JsonResult GetById([FromBody] PostLikeViewModel viewModel)
+        public JsonResult GetById([FromBody] PostViewModel viewModel)
         {
             var data = this.postService.GetById(viewModel.PostId);
             return new JsonResult(data);
         }
 
         [HttpPost]
-        public JsonResult DeleteById([FromBody] PostLikeViewModel viewModel)
+        public JsonResult DeleteById([FromBody] PostViewModel viewModel)
         {
             var data = this.postService.DeleteById(viewModel.PostId);
             return new JsonResult(data);

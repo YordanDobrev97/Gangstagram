@@ -1,0 +1,12 @@
+.followers-container {
+  position: absolute;
+  left: 540px;
+  top: 140px;
+  background: white;
+  width: 300px;
+  height: 500px;
+}
+
+.follower {
+  padding: 30px;
+}

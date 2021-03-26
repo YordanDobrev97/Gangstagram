@@ -9,11 +9,16 @@ function Follow(props) {
   const [isFollow, setFollow] = useState(false);
 
   useEffect(async () => {
+    let isMounted = true;
     const followerId = props.match.params.userId;
     const result = await UserService.isFollow(followerId).then((r) => r.json());
     console.log(result);
     setData(true);
     setFollow(result);
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const followBtn = useCallback(async () => {

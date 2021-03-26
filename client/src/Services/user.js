@@ -31,4 +31,18 @@ export default class UserService {
 
     return fetch("https://localhost:5001/api/users/isFollow", requestOptions);
   };
+
+  static getFollowers = (userId) => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "X-User-Token": userId,
+      },
+    };
+
+    return fetch(
+      "https://localhost:5001/api/users/getFollowers",
+      requestOptions
+    );
+  };
 }

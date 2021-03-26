@@ -5,6 +5,7 @@
     using Instagram.Models;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     public class UsersService : IUsersService
     {
@@ -60,6 +61,20 @@
                 }).FirstOrDefault();
 
             return user;
+        }
+
+        public IEnumerable<UserViewModel> GetFollowers(string userId)
+        {
+            var followers = this.db.Followers
+                .Where(x => x.SenderId == userId)
+                .Select(x => new UserViewModel
+                {
+                    Id = x.ReceiverId,
+                    Username = x.Receiver.UserName,
+                    Image = x.Receiver.Image,
+                }).ToList();
+
+            return followers;
         }
     }
 }

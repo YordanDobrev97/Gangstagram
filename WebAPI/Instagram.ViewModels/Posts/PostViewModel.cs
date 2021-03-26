@@ -1,6 +1,6 @@
 ﻿namespace Instagram.ViewModels.Posts
 {
-    public class PostLikeViewModel
+    public class PostViewModel
     {
         public string PostId { get; set; }
     }
