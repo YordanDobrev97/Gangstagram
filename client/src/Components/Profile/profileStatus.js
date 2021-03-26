@@ -10,7 +10,7 @@ class ProfileStatus extends Component {
   render() {
     return (
       <Fragment>
-        <Bio />
+        <Bio username={this.props.username} />
         <Follow />
         <Followers />
         <Following />

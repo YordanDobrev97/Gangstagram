@@ -13,6 +13,7 @@ class Profile extends Component {
 
     this.state = {
       userId: this.props.userId,
+      username: "",
       isReadToken: this.props.isReadToken,
       posts: null,
       isLoading: false,
@@ -27,7 +28,8 @@ class Profile extends Component {
     ).then((r) => r.json());
 
     this.setState({
-      posts: data,
+      posts: data.posts,
+      username: data.username,
       isLoading: true,
     });
   }
@@ -73,7 +75,7 @@ class Profile extends Component {
             </Button>
           ) : (
             <Fragment>
-              <ProfileStatus />
+              <ProfileStatus username={this.state.username} />
             </Fragment>
           )}
         </Box>

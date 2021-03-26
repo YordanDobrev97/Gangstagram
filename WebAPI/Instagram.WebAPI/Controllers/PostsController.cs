@@ -70,8 +70,15 @@
             }
 
             var posts = this.postService.GetUserPosts(token).ToList();
-            
-            return new JsonResult(posts);
+            var username = this.postService.GetUsername(token);
+
+            var result = new
+            {
+                posts,
+                username,
+            };
+
+            return new JsonResult(result);
         }
 
         [HttpPost]
