@@ -1,6 +1,4 @@
 import React, { Component, Fragment } from "react";
-import { Button } from "@material-ui/core";
-
 import Bio from "./Bio";
 import Follow from "./Follow";
 import Followers from "./Followers";

@@ -16,8 +16,6 @@ export default function Details(props) {
       });
   }, []);
 
-  console.log(postData);
-
   if (!isGetData) {
     return <div>Loading...</div>;
   }
@@ -42,7 +40,7 @@ export default function Details(props) {
       <Box component="aside" border={1} width="45%" height="500px">
         {postData.getByIdPosts.map((post) => {
           return (
-            <Box component="div" margin="16px">
+            <Box key={post.id} component="div" margin="16px">
               <Box display="flex" marginTop="50px">
                 <img
                   width="50px"

@@ -1,29 +1,26 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
 import UserService from "../../Services/user";
 
-function Follow(props) {
+function Follow() {
+  const { userId } = useParams();
+
   const [isGetData, setData] = useState(false);
   const [isFollow, setFollow] = useState(false);
 
-  useEffect(async () => {
-    let isMounted = true;
-    const followerId = props.match.params.userId;
-    const result = await UserService.isFollow(followerId).then((r) => r.json());
-    console.log(result);
-    setData(true);
-    setFollow(result);
-
-    return () => {
-      isMounted = false;
-    };
+  useEffect(() => {
+    UserService.isFollow(userId)
+      .then((r) => r.json())
+      .then((result) => {
+        setData(true);
+        setFollow(result);
+      });
   }, []);
 
   const followBtn = useCallback(async () => {
-    const followerId = props.match.params.userId;
-    const result = await UserService.follow(followerId).then((r) => r.json());
+    const result = await UserService.follow(userId).then((r) => r.json());
 
     if (result) {
       setFollow(true);

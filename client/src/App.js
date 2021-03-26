@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
-import Home from "./Components/Home/index";
-import Navigation from "./Components/Navigation/index";
+import Home from "./Components/Home/Index";
+import Navigation from "./Components/Navigation/Index";
 import Login from "./Components/Login/index";
-import Register from "./Components/Register/index";
+import Register from "./Components/Register/Index";
 import Feeds from "./Components/Feed/Index";
-import CreatePost from "./Components/Post/create";
-import Details from "./Components/Feed/details";
-import Profile from "./Components/Profile/index";
+import CreatePost from "./Components/Post/Create";
+import Details from "./Components/Feed/Details";
+import Profile from "./Components/Profile/Index";
 import UserContext from "./UserContext";
 
 import "./App.css";

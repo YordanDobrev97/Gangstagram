@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 import { Grid, Card, CardContent, Typography } from "@material-ui/core";
 
-import UserAvatar from "./avatar";
+import UserAvatar from "./Avatar";
 import Image from "../Image/Index";
 import FooterFeed from "./FooterFeed";
-import CommentSection from "./comment";
+import CommentSection from "./Comment";
 
 import FeedService from "../../Services/feed";
 
@@ -44,6 +44,7 @@ class Feed extends Component {
               const imgHref = "/feed/" + feedId;
               return (
                 <Grid
+                  key={feedId}
                   container
                   direction="row"
                   justify="center"

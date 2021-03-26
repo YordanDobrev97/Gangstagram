@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Input from "../Input/input";
+import Input from "../Input/Input";
 import Feeds from "../Feed/Index";
 import { Redirect } from "react-router-dom";
 import LoginService from "../../Services/login";

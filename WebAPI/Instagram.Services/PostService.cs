@@ -146,6 +146,7 @@
                 .Where(x => x.PostId == postId)
                 .Select(x => new GetByIdPostViewModel
                 {
+                    Id = x.Id.ToString(),
                     Username = x.User.UserName,
                     Content = x.Text
                 }).ToArray();
